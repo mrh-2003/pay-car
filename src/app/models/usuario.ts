@@ -4,4 +4,5 @@ export class Usuario{
     apellido: string = "";
     email: string = "";
     password: string = "";
+    rol: string = "";
 }
