@@ -10,11 +10,15 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { LoginComponent } from './components/login/login.component';
 import { SharedModule } from './modules/shared/shared.module';
+import { ListBankComponent } from './components/list-bank/list-bank.component';
+import { AddEditBankComponent } from './components/add-edit-bank/add-edit-bank.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    ListBankComponent,
+    AddEditBankComponent
   ],
   imports: [
     BrowserModule,
