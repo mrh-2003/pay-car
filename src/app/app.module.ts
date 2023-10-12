@@ -10,6 +10,8 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { LoginComponent } from './components/login/login.component';
 import { SharedModule } from './modules/shared/shared.module';
+import { ListBankComponent } from './components/list-bank/list-bank.component';
+import { AddEditBankComponent } from './components/add-edit-bank/add-edit-bank.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -25,6 +27,8 @@ import { HistoryComponent } from './components/history/history.component';
   declarations: [
     AppComponent,
     LoginComponent,
+    ListBankComponent,
+    AddEditBankComponent,
     DashboardComponent,
     HomeComponent,
     SmartCreditComponent,
