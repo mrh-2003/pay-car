@@ -1,0 +1,118 @@
+<div class="container">
+    <h2>Realizar corrida</h2>
+    <div class="row">
+      <div class="col-7">
+        <form class="row" [formGroup]="form">
+            <mat-form-field appearance="fill" class="col-6">
+                <mat-label>Seleccione la moneda</mat-label>
+                <mat-select disableRipple formControlName="moneda">
+                  <mat-option value="Dólares">Dólares</mat-option>
+                  <mat-option value="Soles">Soles</mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <mat-form-field appearance="fill" class="col-6">
+                <mat-label>Ingrese el valor del inmueble</mat-label>
+                <input type="number" formControlName="precio" matInput>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-6">
+                <mat-label>Ingrese el % de la cuota inicial
+                </mat-label>
+                <input type="number" matInput formControlName="inicial" >
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-6">
+              <mat-label>Ingrese el % de la cuota final
+              </mat-label>
+              <input type="number" matInput formControlName="final" >
+          </mat-form-field>
+            <mat-form-field appearance="fill" class="col-6"  >
+                <mat-label>Seleccione el tipo de tasa</mat-label>
+                <mat-select (valueChange)="true" disableRipple formControlName="tipoTasa">
+                  <mat-option value="TE">Tasa Efectiva</mat-option>
+                  <mat-option value="TN">Tasa Nominal</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-6">
+                <mat-label>Seleccione el tiempo de la tasa</mat-label>
+                <mat-select disableRipple  formControlName="periodoTasa">
+                  <mat-option value="M">Mensual</mat-option>
+                  <mat-option value="B">Bimestral</mat-option>
+                  <mat-option value="T">Trimestral</mat-option>
+                  <mat-option value="S">Semestral</mat-option>
+                  <mat-option value="A">Anual</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-6" *ngIf="true">
+                <mat-label>Seleccione la capitalización</mat-label>
+                <mat-select  disableRipple  formControlName="capiTasa" >
+                
+                  <mat-option value="Diaria">Diaria</mat-option>
+                  <mat-option value="Mensual">Mensual</mat-option>
+                  <mat-option value="Bimestral">Bimestral</mat-option>
+                  <mat-option value="Trimestral">Trimestral</mat-option>
+                  <mat-option value="Semestral">Semestral</mat-option>
+                  <mat-option value="Anual">Anual</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-6">
+                <mat-label>Ingrese el valor de la tasa
+                </mat-label>
+                <input type="number"  matInput  formControlName="tasa">
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-6">
+                <mat-label>Seleccione la frecuencia de pago</mat-label>
+                <mat-select  disableRipple  formControlName="frecPago">
+                  <mat-option value="Mensual">Mensual</mat-option>
+                  <mat-option value="Bimestral">Bimestral</mat-option>
+                  <mat-option value="Trimestral">Trimestral</mat-option>
+                  <mat-option value="Semestral">Semestral</mat-option>
+                  <mat-option value="Anual">Anual</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="fill" class="col-6">
+                <mat-label>Cantidad de años para pagar
+                </mat-label>
+                <input type="number"  matInput formControlName="plazo" >
+            </mat-form-field>
+                <mat-form-field  appearance="fill" class="col-6" >
+                    <mat-label>Ingrese el plazo de gracia parcial
+                    </mat-label>
+                    <input type="number" matInput formControlName="graciaParcial" >
+                </mat-form-field>
+                <mat-form-field  appearance="fill" class="col-6" >
+                    <mat-label>Ingrese el plazo de gracia total
+                    </mat-label>
+                    <input type="number" matInput formControlName="graciaTotal" >
+                </mat-form-field>
+            <p *ngIf="false" style="font-family: 'Montserrat', sans-serif;
+            color: rgb(47, 15, 55); font-weight:bold; margin-bottom:1rem;"><span style="font-weight: bold; color: red;">Nota:</span> Ingresar un periodo menor a {{3}}.</p>
+            <p *ngIf="false" style="font-family: 'Montserrat', sans-serif;
+            color: rgb(47, 15, 55); font-weight:bold; margin-bottom:1rem;"><span style="font-weight: bold; color: red;">Nota:</span> Colocar periodos de forma ascendente.</p>
+            <mat-form-field appearance="fill" class="col-6">
+                <mat-label>Ingrese el valor de COK
+                </mat-label>
+                <input type="number" matInput formControlName="COK" >
+            </mat-form-field>
+            <button  mat-raised-button color="primary" type="button" (click)="true" [disabled]="form.invalid">Validar Corrida</button>
+        </form>
+      </div>
+      <div class="col-5">
+        <mat-card class="card">
+          <mat-card-header>
+            <mat-card-title>Resumen de la corrida</mat-card-title>
+            <mat-card-subtitle>Start</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+              bred for hunting.
+            </p>
+          </mat-card-content>
+          <mat-card-actions class="center-button">
+            <button mat-button>Generar corrida</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </div>
