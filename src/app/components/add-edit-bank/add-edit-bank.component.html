@@ -1,1 +1,67 @@
-<p>add-edit-bank works!</p>
+<div class="container">
+    <h2>Datos del banco</h2>
+    <form class="row" [formGroup]="form">
+        <h3>Gastos iniciales</h3>
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>ID</mat-label>
+            <input type="text" formControlName="id" matInput>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Entidad Bancaria
+            </mat-label>
+            <input type="text" matInput formControlName="nombre">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Costes Notariales
+            </mat-label>
+            <input type="number" matInput formControlName="cosNotariales">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Costes Registrales
+            </mat-label>
+            <input type="number" matInput formControlName="cosRegistrales">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Tasación
+            </mat-label>
+            <input type="number" matInput formControlName="tasacion">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Comisión de estudio
+            </mat-label>
+            <input type="number" matInput formControlName="comEstudio">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Comisión activación
+            </mat-label>
+            <input type="number" matInput formControlName="comActivacion">
+        </mat-form-field>
+        <h3>Gastos periodicos</h3>
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Comisión periodica
+            </mat-label>
+            <input type="number" matInput formControlName="comPeriodica">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Portes
+            </mat-label>
+            <input type="number" matInput formControlName="portes">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Gastos de Administración
+            </mat-label>
+            <input type="number" matInput formControlName="gastosAdmin">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Ingrese el % de de Seguro Desgravamen
+            </mat-label>
+            <input type="number" matInput formControlName="segDesgravamen">
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>Ingrese el % de de Seguro Riesgo
+            </mat-label>
+            <input type="number" matInput formControlName="segRiesgo">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="button" (click)="addBank()" [disabled]="form.invalid">{{0}}</button>
+    </form>
+</div>

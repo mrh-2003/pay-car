@@ -43,4 +43,4 @@ import {MatCardModule} from '@angular/material/card';
     MatCardModule
   ]
 })
-export class SharedModule { }
+export class SharedModule { } 

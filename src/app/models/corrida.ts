@@ -1,12 +1,12 @@
 export class Corrida {
     id : string = ""; 
     moneda: string = "";
-    valorVehiculo : number = 0; 
-    cuotaInicial: number = 0; 
-    cuotaFinal: number = 0; 
-    valorTasa: number = 0; 
-    frecuenciaPago: string = "";
-    plazoAnios: number = 0; 
+    precio : number = 0; 
+    inicial: number = 0; 
+    final: number = 0; 
+    tasa: number = 0; 
+    frecPago: string = "";
+    plazo: number = 0; 
     COK: number = 0; 
     idUsuario: string = ""; 
 }
