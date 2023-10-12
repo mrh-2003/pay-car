@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-add-edit-bank',
@@ -6,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./add-edit-bank.component.scss']
 })
 export class AddEditBankComponent {
-  form !: FormGroup;
+  form !: FormGroup ;
   constructor(private fb: FormBuilder){}
   ngOnInit(){
 
