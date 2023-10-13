@@ -10,7 +10,8 @@ export class CorridaService {
   constructor(private db: AngularFirestore) { }
 
   addCorrida(corrida: Corrida){
-    return this.db.collection('corridas').add(corrida);
+    corrida.id = this.db.createId()
+    return this.db.collection('corridas').doc(corrida.id).set(corrida);
   }
   deleteCorrida(id: string){
     return this.db.collection('corridas').doc(id).delete();
@@ -21,7 +22,7 @@ export class CorridaService {
   getCorridas() : Observable<Corrida[]>{
     return this.db.collection('corridas').valueChanges() as Observable<Corrida[]>;
   }
-  getCorrida(id: string){
-    return this.db.collection('corridas').doc(id).valueChanges();
+  getCorrida(id: string) : Observable<Corrida>{
+    return this.db.collection('corridas').doc(id).valueChanges() as Observable<Corrida>;
   }
 }

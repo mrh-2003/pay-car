@@ -9,7 +9,8 @@ export class PeriodoGraciaService {
 
   constructor(private db: AngularFirestore) { }
   addPeriodo(periodo: PeriodoGracia){
-    return this.db.collection('periodos').add(periodo);
+    periodo.id = this.db.createId()
+    return this.db.collection('periodos').doc(periodo.id).set(periodo);
   }
   deletePeriodo(id: string){
     return this.db.collection('periodos').doc(id).delete();
@@ -20,7 +21,7 @@ export class PeriodoGraciaService {
   getPeriodos() : Observable<PeriodoGracia[]>{
     return this.db.collection('periodos').valueChanges() as Observable<PeriodoGracia[]>;
   }
-  getPeriodo(id: string){
-    return this.db.collection('periodos').doc(id).valueChanges();
+  getPeriodo(id: string): Observable<PeriodoGracia>{
+    return this.db.collection('periodos').doc(id).valueChanges() as Observable<PeriodoGracia>;
   }
 }
