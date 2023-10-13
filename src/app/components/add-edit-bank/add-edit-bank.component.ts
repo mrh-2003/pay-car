@@ -28,9 +28,9 @@ export class AddEditBankComponent {
   }
 
   addBank(){
-    this.bancoService.addBanco(this.form.value)
+   this.bancoService.addBanco(this.form.value)
     .then((response)=> console.log(response))
-    .catch((error) => console.log(error))
+    .catch((error) => console.log(error)) 
   }
 
 

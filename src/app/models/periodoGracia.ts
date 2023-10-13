@@ -1,5 +1,5 @@
 export class PeriodoGracia {
-    id: string = ""; 
+    id?: string; 
     periodo : string = "";
     idCorrida : string = ""; 
 }

@@ -11,6 +11,9 @@ import {MatListModule} from '@angular/material/list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatSliderModule} from '@angular/material/slider';
 import {MatCardModule} from '@angular/material/card';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 @NgModule({
   declarations: [],
   imports: [
@@ -26,7 +29,10 @@ import {MatCardModule} from '@angular/material/card';
     MatListModule,
     MatSelectModule,
     MatSliderModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   exports:[
     FormsModule,
@@ -40,7 +46,10 @@ import {MatCardModule} from '@angular/material/card';
     MatListModule,
     MatSelectModule,
     MatSliderModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ]
 })
 export class SharedModule { } 
