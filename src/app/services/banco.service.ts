@@ -11,12 +11,6 @@ export class BancoService {
   constructor(private db: AngularFirestore) { }
 
    addBanco(banco: Banco){
-    /*return this.db.collection('bancos').add(banco) .then((response)=>{
-      this.getBanco(response.id).subscribe((data: Banco)=>{
-        data.id = response.id;
-        console.log(this.updateBanco(data));
-      })
-    }) */
     banco.id = this.db.createId()
     return this.db.collection('bancos').doc(banco.id).set(banco);
   } 

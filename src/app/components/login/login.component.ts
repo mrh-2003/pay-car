@@ -1,5 +1,6 @@
 import { Component, ElementRef, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -8,59 +9,60 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  constructor(private elementRef: ElementRef, 
-    private loginService: LoginService, 
-    private fb: FormBuilder) { }
-  front_box : any;
-  form_login : any;
-  form_register : any;
-  back_box_login : any;
-  back_box_register : any;
+  constructor(private elementRef: ElementRef,
+    private loginService: LoginService,
+    private fb: FormBuilder,
+    private router: Router) { }
+  front_box: any;
+  form_login: any;
+  form_register: any;
+  back_box_login: any;
+  back_box_register: any;
 
   form !: FormGroup
 
-  ngOnInit(){
+  ngOnInit() {
     this.form = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        password : ['', [Validators.required, Validators.minLength(6)]]
+        password: ['', [Validators.required, Validators.minLength(6)]]
       }
     )
   }
 
-  register(){
+  register() {
     this.loginService.register(this.form.value)
-    .then(
-      ()=> {
-        this.changeLogin()  
-      }
-    )
-    .catch(error=>console.log(error));
+      .then(
+        () => {
+          this.changeLogin()
+        }
+      )
+      .catch(error => console.log(error));
   }
 
-  login(){
+  login() {
     this.loginService.login(this.form.value)
-    .then(
-      response=> console.log("Goo")
-    )
-    .catch(error=>console.log(error));
+      .then(
+        response => this.router.navigate([""])
+      )
+      .catch(error => console.log(error));
   }
 
-  
-  loginGoogle(){
+
+  loginGoogle() {
     this.loginService.loginGoogle()
-    .then(
-      response=> console.log("Goo")
-    )
-    .catch(error=>console.log(error));
+      .then(
+        response => this.router.navigate([""])
+      )
+      .catch(error => console.log(error));
   }
 
-  loginFacebook(){
+  loginFacebook() {
     this.loginService.loginGoogle()
-    .then(
-      response=> console.log("Goo")
-    )
-    .catch(error=>console.log(error));
+      .then(
+        response => this.router.navigate([""])
+      )
+      .catch(error => console.log(error));
   }
 
   ngAfterViewInit() {
@@ -77,11 +79,11 @@ export class LoginComponent {
     this.withPage(); // Llama a la función que deseas ejecutar en cada redimensionamiento
   }
 
-  withPage(){
+  withPage() {
     this.back_box_register.style.display = "block";
-    if(window.innerWidth > 850){
+    if (window.innerWidth > 850) {
       this.back_box_login.style.display = "block";
-    } else{
+    } else {
       this.back_box_register.style.opacity = "1";
       this.back_box_login.style.display = "none";
       this.form_login.style.display = "block";
@@ -92,13 +94,13 @@ export class LoginComponent {
   }
 
   changeLogin() {
-    if(window.innerWidth > 850){
+    if (window.innerWidth > 850) {
       this.form_register.style.display = "none";
       this.front_box.style.left = "10px"
       this.form_login.style.display = "block";
       this.back_box_register.style.opacity = "1";
       this.back_box_login.style.opacity = "0";
-    }else{
+    } else {
       this.form_register.style.display = "none";
       this.front_box.style.left = "0px"
       this.form_login.style.display = "block";
@@ -109,13 +111,13 @@ export class LoginComponent {
   }
 
   changeRegister() {
-    if(window.innerWidth > 850){
+    if (window.innerWidth > 850) {
       this.form_register.style.display = "block";
       this.front_box.style.left = "410px"
       this.form_login.style.display = "none";
       this.back_box_register.style.opacity = "0";
       this.back_box_login.style.opacity = "1";
-    } else{
+    } else {
       this.form_register.style.display = "block";
       this.front_box.style.left = "0px"
       this.form_login.style.display = "none";

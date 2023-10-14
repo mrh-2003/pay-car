@@ -1,10 +1,11 @@
-<div class="container">
-    <h2>Datos del banco</h2>
+<div class="row text-center center justify-content-center">
+    <div class="col-6">
+        <h2>Datos del banco</h2>
     <form class="row" [formGroup]="form">
         <h3>Gastos iniciales</h3>
         <mat-form-field appearance="fill" class="col-12">
             <mat-label>ID</mat-label>
-            <input type="text" formControlName="id" matInput>
+            <input type="text" formControlName="id" matInput readonly="true">
         </mat-form-field>
         <mat-form-field appearance="fill" class="col-12">
             <mat-label>Entidad Bancaria
@@ -62,6 +63,7 @@
             </mat-label>
             <input type="number" matInput formControlName="segRiesgo">
         </mat-form-field>
-        <button mat-raised-button color="primary" type="button" (click)="addBank()" [disabled]="form.invalid">{{0}}</button>
+        <button mat-raised-button color="primary" type="button" (click)="addEditBank()" [disabled]="form.invalid">{{action}}</button>
     </form>
+    </div>
 </div>

@@ -15,11 +15,15 @@
         <mat-icon> trending_up</mat-icon>
         Realizar corridas
       </button>
-      <button mat-button>
+      <button mat-button routerLink="/history">
         <mat-icon>history</mat-icon>
         Historial de corridas
       </button>
-      <button mat-button>
+      <button mat-button routerLink="/bank">
+        <mat-icon>savings</mat-icon>
+        Financieras
+      </button>
+      <button mat-button (click)="logout()">
         <mat-icon>logout</mat-icon>
         Cerrar sesión
       </button>
