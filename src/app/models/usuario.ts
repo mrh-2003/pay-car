@@ -1,8 +1,5 @@
 export class Usuario{
-    id?: string; 
-    nombre: string = ""; 
-    apellido: string = "";
-    email: string = "";
-    password: string = "";
+    id: string=""; 
+    nombres: string = "";
     rol: string = "";
 }

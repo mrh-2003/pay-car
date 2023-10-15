@@ -7,10 +7,11 @@ import { SmartCreditComponent } from './components/smart-credit/smart-credit.com
 import { ListBankComponent } from './components/list-bank/list-bank.component';
 import { AddEditBankComponent } from './components/add-edit-bank/add-edit-bank.component';
 import { HistoryComponent } from './components/history/history.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: '', component: DashboardComponent,
+  {path: '', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
       {path: 'home', component: HomeComponent},
       {path: 'run', component: SmartCreditComponent},
@@ -18,13 +19,14 @@ const routes: Routes = [
       {path: 'bank/add', component: AddEditBankComponent},
       {path: 'bank', component: ListBankComponent},
       {path: 'history', component: HistoryComponent},
-    ]
+    ],
   },
   {path: '**', redirectTo: 'login', pathMatch: 'full'},
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [AuthGuard]
 })
 export class AppRoutingModule { }

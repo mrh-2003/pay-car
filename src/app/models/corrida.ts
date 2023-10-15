@@ -1,5 +1,8 @@
+import { Banco } from "./banco";
+import { PeriodoGracia } from "./periodoGracia";
+
 export class Corrida {
-    id?: string;
+    id: string  ="";
     moneda: string = "";
     precio : number = 0; 
     inicial: number = 0; 
@@ -8,5 +11,7 @@ export class Corrida {
     frecPago: string = "";
     plazo: number = 0; 
     COK: number = 0; 
-    idUsuario: string = ""; 
+    gracia : string[] = [];
+    idUsuario: string = "";
+    banco: Banco = new Banco(); 
 }

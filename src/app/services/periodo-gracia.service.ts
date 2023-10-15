@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class PeriodoGraciaService {
-
+/* 
   constructor(private db: AngularFirestore) { }
   addPeriodo(periodo: PeriodoGracia){
     periodo.id = this.db.createId()
@@ -23,5 +23,5 @@ export class PeriodoGraciaService {
   }
   getPeriodo(id: string): Observable<PeriodoGracia>{
     return this.db.collection('periodos').doc(id).valueChanges() as Observable<PeriodoGracia>;
-  }
+  } */
 }

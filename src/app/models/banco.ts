@@ -1,5 +1,5 @@
 export class Banco{
-  id?: string;
+  id: string="";
   nombre: string = "";
   cosNotariales : number =0;
   cosRegistrales : number =0;

@@ -1,5 +1,11 @@
 export class PeriodoGracia {
-    id?: string; 
-    periodo : string = "";
-    idCorrida : string = ""; 
+    id: number = 0; 
+    gracia : string = "";
+
+    toJSON() {
+        return {
+          id: this.id,
+          gracia: this.gracia,
+        };
+    }
 }

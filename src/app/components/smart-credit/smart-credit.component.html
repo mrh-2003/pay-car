@@ -35,11 +35,11 @@
             <mat-form-field appearance="fill" class="col-6">
                 <mat-label>Seleccione el tiempo de la tasa</mat-label>
                 <mat-select disableRipple  formControlName="periodoTasa">
-                  <mat-option value="M">Mensual</mat-option>
-                  <mat-option value="B">Bimestral</mat-option>
-                  <mat-option value="T">Trimestral</mat-option>
-                  <mat-option value="S">Semestral</mat-option>
-                  <mat-option value="A">Anual</mat-option>
+                  <mat-option value="Mensual">Mensual</mat-option>
+                  <mat-option value="Bimestral">Bimestral</mat-option>
+                  <mat-option value="Trimestral">Trimestral</mat-option>
+                  <mat-option value="Semestral">Semestral</mat-option>
+                  <mat-option value="Anual">Anual</mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="fill" class="col-6" *ngIf="true">
@@ -93,7 +93,14 @@
                 </mat-label>
                 <input type="number" matInput formControlName="COK" >
             </mat-form-field>
-            <button  mat-raised-button color="primary" type="button" (click)="true" [disabled]="form.invalid">Validar Corrida</button>
+            <mat-form-field appearance="fill" class="col-6">
+              <mat-label>Seleccione la entidad financiera</mat-label>
+              <mat-select disableRipple formControlName="banco" >
+                <mat-option *ngFor="let bank of bancos" [value]="bank"> {{bank.nombre}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+            <button  mat-raised-button color="primary" type="button" (click)="addCorrida()" [disabled]="false">Validar Corrida</button>
         </form>
       </div>
       <div class="col-xl-5 col-xs-12">
