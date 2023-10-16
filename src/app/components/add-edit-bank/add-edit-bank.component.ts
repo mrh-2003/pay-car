@@ -64,7 +64,7 @@ export class AddEditBankComponent {
     } else {
       this.bancoService.updateBanco(this.form.value)
         .then((response) => this.router.navigate(["bank"]))
-        .catch((error) => console.log(error))
+        .catch((error) => console.log(error)) 
     } 
     
   }
