@@ -3,6 +3,7 @@ import { PeriodoGracia } from "./periodoGracia";
 
 export class Corrida {
     id: string  ="";
+    fecha: string = "";
     moneda: string = "";
     precio : number = 0; 
     inicial: number = 0; 

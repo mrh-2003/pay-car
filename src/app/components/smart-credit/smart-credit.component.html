@@ -100,24 +100,40 @@
                 </mat-option>
               </mat-select>
           </mat-form-field>
-            <button  mat-raised-button color="primary" type="button" (click)="addCorrida()" [disabled]="false">Validar Corrida</button>
+            <button  mat-raised-button color="primary" type="button" (click)="addCorrida()" [disabled]="form.invalid">Validar Corrida</button>
         </form>
       </div>
       <div class="col-xl-5 col-xs-12">
         <mat-card class="card">
-          <mat-card-header>
+          <mat-card-header class="justify-content-center">
             <mat-card-title>Resumen de la corrida</mat-card-title>
-            <mat-card-subtitle>Start</mat-card-subtitle>
+            <mat-card-subtitle>Datos de la entidad financiera</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="izquierda">
+              <ul class="list-group">
+                <li class="list-group-item"> <strong>Nombre: </strong> {{form.value.banco.nombre}} </li>
+                <li class="list-group-item"> <strong>Costes Notariales: </strong> {{form.value.banco.cosNotariales}} </li>
+                <li class="list-group-item"> <strong>Costes Registrales: </strong> {{form.value.banco.cosRegistrales}} </li>
+                <li class="list-group-item"> <strong>Tasación: </strong> {{form.value.banco.tasacion}} </li>
+                <li class="list-group-item"> <strong>Comisión de estudio: </strong> {{form.value.banco.comEstudio}} </li>
+                <li class="list-group-item"> <strong>Comisión activación: </strong> {{form.value.banco.comActivacion}} </li>
+                <li class="list-group-item"> <strong>Comisión periodica: </strong> {{form.value.banco.comPeriodica}} </li>
+                <li class="list-group-item"> <strong>Portes: </strong> {{form.value.banco.portes}} </li>
+                <li class="list-group-item"> <strong>Gastos de Administración: </strong> {{form.value.banco.gastosAdmin}} </li>
+                <li class="list-group-item"> <strong>Seguro desgravamen: </strong> {{form.value.banco.segDesgravamen}}% </li>
+                <li class="list-group-item"> <strong>Seguro riesgo: </strong> {{form.value.banco.segRiesgo}}% </li>
+              </ul>
+          </mat-card-content>
+          <mat-card-header class="justify-content-center">
+            <mat-card-subtitle>Datos de la corrida</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content>
-            <p>
-              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-              bred for hunting.
-            </p>
+              <ul class="list-group">
+                <li class="list-group-item"> <strong>Moneda: </strong> {{form.value.moneda}} </li>
+              </ul>
           </mat-card-content>
-          <mat-card-actions class="center-button">
-            <button mat-button>Generar corrida</button>
+          <mat-card-actions class="justify-content-center">
+            <button mat-raised-button color="warn">Generar corrida</button>
           </mat-card-actions>
         </mat-card>
       </div>

@@ -2,11 +2,8 @@ import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Banco } from 'src/app/models/banco';
-import { Corrida } from 'src/app/models/corrida';
-import { PeriodoGracia } from 'src/app/models/periodoGracia';
 import { BancoService } from 'src/app/services/banco.service';
 import { CorridaService } from 'src/app/services/corrida.service';
-import { PeriodoGraciaService } from 'src/app/services/periodo-gracia.service';
 
 @Component({
   selector: 'app-smart-credit',
@@ -16,6 +13,7 @@ import { PeriodoGraciaService } from 'src/app/services/periodo-gracia.service';
 export class SmartCreditComponent {
   form!: FormGroup;
   bancos: Banco[] = []
+  info = {}
   constructor(private fb: FormBuilder,
     private corridaService: CorridaService,
     private auth: AngularFireAuth,
@@ -55,7 +53,7 @@ export class SmartCreditComponent {
     }
   }
 
-  async addCorrida(){    
+  async addCorrida(){
     const info = this.form.value;
     info.tasa = info.tasa / 100;
     info.inicial = info.inicial / 100;
@@ -67,6 +65,7 @@ export class SmartCreditComponent {
     for (const campo of camposDeseados) {
       corrida[campo] = info[campo];
     }
+    corrida.fecha = new Date().toDateString();
     await this.auth.currentUser.then((response)=>corrida.idUsuario = response?.uid as string);
     if(info.tipoTasa == "TN"){ //Calculamos la tasa efectiva
       corrida.tasa = Math.pow(1 +  info.tasa / 

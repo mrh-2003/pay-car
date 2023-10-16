@@ -55,7 +55,7 @@ export class AddEditBankComponent {
   }
 
   addEditBank() {
-    this.form.value.segDesgravamen = this.form.value.segDesgravamen / 100;
+   this.form.value.segDesgravamen = this.form.value.segDesgravamen / 100;
     this.form.value.segRiesgo = this.form.value.segRiesgo / 100;
     if (this.id == null) {
       this.bancoService.addBanco(this.form.value)
@@ -65,6 +65,7 @@ export class AddEditBankComponent {
       this.bancoService.updateBanco(this.form.value)
         .then((response) => this.router.navigate(["bank"]))
         .catch((error) => console.log(error))
-    }
+    } 
+    
   }
 }

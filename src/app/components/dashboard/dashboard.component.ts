@@ -23,6 +23,8 @@ export class DashboardComponent {
     private router: Router) {}
   logout(){
     this.login.logout()
-    .then((response) => this.router.navigate(["/login"]) )
+    .then((response) => {
+      this.router.navigate(["/login"])
+    })
   }
 }

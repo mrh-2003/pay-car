@@ -25,4 +25,8 @@ export class CorridaService {
   getCorrida(id: string) : Observable<Corrida>{
     return this.db.collection('corridas').doc(id).valueChanges() as Observable<Corrida>;
   }
+  getCorridasByUserID(userId: string): Observable<Corrida[]> {
+    return this.db.collection('corridas', ref => ref.where('idUsuario', '==', userId))
+      .valueChanges() as Observable<Corrida[]>;
+  }
 }
