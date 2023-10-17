@@ -1,0 +1,39 @@
+<div class="row">
+    <p>Poner los egresos en rojo y los ingresos en azul</p>
+    <div class="col table-container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">N°</th>
+                    <th scope="col">P.G.</th>
+                    <th scope="col">Saldo</th>
+                    <th scope="col">Amort.</th>
+                    <th scope="col">Interes</th>
+                    <th scope="col">Seguro desgrav</th>
+                    <th scope="col">Cuota</th>
+                    <th scope="col">Seguro riesgo</th>
+                    <th scope="col">Comision</th>
+                    <th scope="col">Portes</th>
+                    <th scope="col">Gastos Adm.</th>
+                    <th scope="col">Flujo total</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                <tr *ngFor="let p of periodos; let i = index;">
+                    <th scope="row">{{i}}</th>
+                    <td >{{getGracia(i)}}</td>
+                    <td [ngClass]="formatearNumero(abs(p.saldo)).css">{{formatearNumero(abs(p.saldo)).valor}}</td>
+                    <td [ngClass]="formatearNumero(-p.amort).css">{{formatearNumero(-p.amort > 0? 0: -p.amort).valor}}</td>
+                    <td [ngClass]="formatearNumero(-p.interes).css"> {{formatearNumero(-p.interes).valor}}</td>
+                    <td [ngClass]="formatearNumero(-p.segDes).css">{{formatearNumero(-p.segDes).valor}}</td>
+                    <td [ngClass]="formatearNumero(-p.cuota).css">{{formatearNumero(-p.cuota).valor}}</td>
+                    <td [ngClass]="formatearNumero(i!=0 && i != periodos.length - 1 ? -getSeguroRiesgo() : 0).css">{{formatearNumero(i!=0 && i != periodos.length - 1 ? -getSeguroRiesgo() : 0).valor}}</td>
+                    <td [ngClass]="formatearNumero(i!=0 && i != periodos.length - 1? -corrida.banco.comPeriodica : 0).css">{{formatearNumero(i!=0 && i != periodos.length - 1? -corrida.banco.comPeriodica : 0).valor}}</td>
+                    <td [ngClass]="formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.portes : 0).css">{{formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.portes : 0).valor}}</td>
+                    <td [ngClass]="formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.gastosAdmin : 0).css">{{formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.gastosAdmin : 0).valor}}</td>
+                    <td [ngClass]="formatearNumero(i == 0? p.flujo : -p.flujo).css" >{{formatearNumero(i == 0? p.flujo : -p.flujo).valor}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

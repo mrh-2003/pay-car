@@ -43,7 +43,7 @@ export class LoginComponent {
   login() {
     this.loginService.login(this.form.value)
       .then(
-        response => this.router.navigate([""])
+        response => this.router.navigate(["home"])
       )
       .catch(error => console.log(error));
   }
@@ -52,7 +52,7 @@ export class LoginComponent {
   loginGoogle() {
     this.loginService.loginGoogle()
       .then(
-        response => this.router.navigate([""])
+        response => this.router.navigate(["home"])
       )
       .catch(error => console.log(error));
   }
@@ -60,7 +60,7 @@ export class LoginComponent {
   loginFacebook() {
     this.loginService.loginGoogle()
       .then(
-        response => this.router.navigate([""])
+        response => this.router.navigate(["home"])
       )
       .catch(error => console.log(error));
   }

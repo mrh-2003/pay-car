@@ -1,9 +1,9 @@
 <div class="container text-center">
     <h2>Realizar corrida</h2>
     <div class="row">
-      <div class="col-xl-7 col-xs-12">
+      <div class="col-xl-5 col-xs-12 cuadro">
         <form class="row" [formGroup]="form">
-            <mat-form-field appearance="fill" class="col-6">
+            <mat-form-field appearance="fill">
                 <mat-label>Seleccione la moneda</mat-label>
                 <mat-select disableRipple formControlName="moneda">
                   <mat-option value="Dólares">Dólares</mat-option>
@@ -11,28 +11,28 @@
                 </mat-select>
             </mat-form-field>
             
-            <mat-form-field appearance="fill" class="col-6">
-                <mat-label>Ingrese el valor del inmueble</mat-label>
+            <mat-form-field appearance="fill">
+                <mat-label>Ingrese el valor del vehiculo</mat-label>
                 <input type="number" formControlName="precio" matInput>
             </mat-form-field>
-            <mat-form-field appearance="fill" class="col-6">
+            <mat-form-field appearance="fill">
                 <mat-label>Ingrese el % de la cuota inicial
                 </mat-label>
                 <input type="number" matInput formControlName="inicial" >
             </mat-form-field>
-            <mat-form-field appearance="fill" class="col-6">
+            <mat-form-field appearance="fill">
               <mat-label>Ingrese el % de la cuota final
               </mat-label>
               <input type="number" matInput formControlName="final" >
           </mat-form-field>
-            <mat-form-field appearance="fill" class="col-6"  >
+            <mat-form-field appearance="fill"  >
                 <mat-label>Seleccione el tipo de tasa</mat-label>
                 <mat-select (valueChange)="true" disableRipple formControlName="tipoTasa">
                   <mat-option value="TE">Tasa Efectiva</mat-option>
                   <mat-option value="TN">Tasa Nominal</mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="fill" class="col-6">
+            <mat-form-field appearance="fill">
                 <mat-label>Seleccione el tiempo de la tasa</mat-label>
                 <mat-select disableRipple  formControlName="periodoTasa">
                   <mat-option value="Mensual">Mensual</mat-option>
@@ -42,7 +42,7 @@
                   <mat-option value="Anual">Anual</mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="fill" class="col-6" *ngIf="true">
+            <mat-form-field appearance="fill" *ngIf="true">
                 <mat-label>Seleccione la capitalización</mat-label>
                 <mat-select disableRipple  formControlName="capiTasa">
                 
@@ -54,12 +54,12 @@
                   <mat-option value="Anual">Anual</mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="fill" class="col-6">
+            <mat-form-field appearance="fill">
                 <mat-label>Ingrese el valor de la tasa
                 </mat-label>
                 <input type="number"  matInput  formControlName="tasa">
             </mat-form-field>
-            <mat-form-field appearance="fill" class="col-6">
+            <mat-form-field appearance="fill">
                 <mat-label>Seleccione la frecuencia de pago</mat-label>
                 <mat-select  disableRipple  formControlName="frecPago">
                   <mat-option value="Mensual">Mensual</mat-option>
@@ -69,17 +69,17 @@
                   <mat-option value="Anual">Anual</mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="fill" class="col-6">
+            <mat-form-field appearance="fill">
                 <mat-label>Cantidad de años para pagar
                 </mat-label>
                 <input type="number"  matInput formControlName="plazo" >
             </mat-form-field>
-                <mat-form-field  appearance="fill" class="col-6" >
+                <mat-form-field  appearance="fill" >
                     <mat-label>Ingrese el plazo de gracia parcial
                     </mat-label>
                     <input type="number" matInput formControlName="graciaParcial" >
                 </mat-form-field>
-                <mat-form-field  appearance="fill" class="col-6" >
+                <mat-form-field  appearance="fill" >
                     <mat-label>Ingrese el plazo de gracia total
                     </mat-label>
                     <input type="number" matInput formControlName="graciaTotal" >
@@ -88,52 +88,65 @@
             color: rgb(47, 15, 55); font-weight:bold; margin-bottom:1rem;"><span style="font-weight: bold; color: red;">Nota:</span> Ingresar un periodo menor a {{3}}.</p>
             <p *ngIf="false" style="font-family: 'Montserrat', sans-serif;
             color: rgb(47, 15, 55); font-weight:bold; margin-bottom:1rem;"><span style="font-weight: bold; color: red;">Nota:</span> Colocar periodos de forma ascendente.</p>
-            <mat-form-field appearance="fill" class="col-6">
+            <mat-form-field appearance="fill">
                 <mat-label>Ingrese el valor de COK
                 </mat-label>
                 <input type="number" matInput formControlName="COK" >
             </mat-form-field>
-            <mat-form-field appearance="fill" class="col-6">
+            <mat-form-field appearance="fill">
               <mat-label>Seleccione la entidad financiera</mat-label>
               <mat-select disableRipple formControlName="banco" >
                 <mat-option *ngFor="let bank of bancos" [value]="bank"> {{bank.nombre}}
                 </mat-option>
               </mat-select>
           </mat-form-field>
-            <button  mat-raised-button color="primary" type="button" (click)="addCorrida()" [disabled]="form.invalid">Validar Corrida</button>
+            <button  mat-raised-button color="primary" type="button" (click)="validateRun()" [disabled]="form.invalid">Validar Corrida</button>
         </form>
       </div>
-      <div class="col-xl-5 col-xs-12">
+      <span class="col-1"></span>
+      <div class="col-xl-6 col-xs-12">
         <mat-card class="card">
           <mat-card-header class="justify-content-center">
             <mat-card-title>Resumen de la corrida</mat-card-title>
+            <mat-card-subtitle>Datos de la corrida</mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content class="izquierda">
+              <ul class="list-group">
+                <li class="list-group-item"> <strong>Moneda: </strong> {{mostrar.moneda }} </li>
+                <li class="list-group-item"> <strong>Valor del vehiculo: </strong> {{mostrar.precio}} </li>
+                <li class="list-group-item"> <strong>Cuota inicial: </strong> {{mostrar.inicial}}% </li>
+                <li class="list-group-item"> <strong>Valor cuota inicial: </strong> {{mostrar.precio != null? (mostrar.inicial / 100) * mostrar.precio : ""}} </li>
+                <li class="list-group-item"> <strong>Cuota final: </strong> {{mostrar.final}}% </li>
+                <li class="list-group-item"> <strong>Valor cuota final: </strong> {{mostrar.precio!= null? ( mostrar.final / 100) * mostrar.precio: ""}} </li>
+                <li class="list-group-item"> <strong>Tasa efectiva: </strong> {{mostrar.tasa!= null?round(getTasaEfectiva(mostrar)): ""}}% </li>
+                <li class="list-group-item"> <strong>Frecuencia de pago: </strong> {{mostrar.frecPago}} </li>
+                <li class="list-group-item"> <strong>Plazo: </strong> {{mostrar.plazo}} años</li>
+                <li class="list-group-item"> <strong>Cantidad cuotas: </strong> {{mostrar.frecPago!= null? mostrar.plazo * 360 / getDias(mostrar.frecPago) : ""}}</li>
+                <li class="list-group-item"> <strong>Periodo de gracia total: </strong> {{mostrar.graciaTotal}} </li>
+                <li class="list-group-item"> <strong>Periodo de gracia parcial: </strong> {{mostrar.graciaParcial}} </li>
+                <li class="list-group-item"> <strong>Costo oportunidad: </strong> {{mostrar.COK}}% </li>
+              </ul>
+          </mat-card-content>
+          <mat-card-header class="justify-content-center">
             <mat-card-subtitle>Datos de la entidad financiera</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="izquierda">
               <ul class="list-group">
-                <li class="list-group-item"> <strong>Nombre: </strong> {{form.value.banco.nombre}} </li>
-                <li class="list-group-item"> <strong>Costes Notariales: </strong> {{form.value.banco.cosNotariales}} </li>
-                <li class="list-group-item"> <strong>Costes Registrales: </strong> {{form.value.banco.cosRegistrales}} </li>
-                <li class="list-group-item"> <strong>Tasación: </strong> {{form.value.banco.tasacion}} </li>
-                <li class="list-group-item"> <strong>Comisión de estudio: </strong> {{form.value.banco.comEstudio}} </li>
-                <li class="list-group-item"> <strong>Comisión activación: </strong> {{form.value.banco.comActivacion}} </li>
-                <li class="list-group-item"> <strong>Comisión periodica: </strong> {{form.value.banco.comPeriodica}} </li>
-                <li class="list-group-item"> <strong>Portes: </strong> {{form.value.banco.portes}} </li>
-                <li class="list-group-item"> <strong>Gastos de Administración: </strong> {{form.value.banco.gastosAdmin}} </li>
-                <li class="list-group-item"> <strong>Seguro desgravamen: </strong> {{form.value.banco.segDesgravamen}}% </li>
-                <li class="list-group-item"> <strong>Seguro riesgo: </strong> {{form.value.banco.segRiesgo}}% </li>
-              </ul>
-          </mat-card-content>
-          <mat-card-header class="justify-content-center">
-            <mat-card-subtitle>Datos de la corrida</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-              <ul class="list-group">
-                <li class="list-group-item"> <strong>Moneda: </strong> {{form.value.moneda}} </li>
+                <li class="list-group-item"> <strong>Nombre: </strong> {{mostrar.banco?.nombre}} </li>
+                <li class="list-group-item"> <strong>Costes Notariales: </strong> {{mostrar.banco?.cosNotariales}} </li>
+                <li class="list-group-item"> <strong>Costes Registrales: </strong> {{mostrar.banco?.cosRegistrales}} </li>
+                <li class="list-group-item"> <strong>Tasación: </strong> {{mostrar.banco?.tasacion}} </li>
+                <li class="list-group-item"> <strong>Comisión de estudio: </strong> {{mostrar.banco?.comEstudio}} </li>
+                <li class="list-group-item"> <strong>Comisión activación: </strong> {{mostrar.banco?.comActivacion}} </li>
+                <li class="list-group-item"> <strong>Comisión periodica: </strong> {{mostrar.banco?.comPeriodica}} </li>
+                <li class="list-group-item"> <strong>Portes: </strong> {{mostrar.banco?.portes}} </li>
+                <li class="list-group-item"> <strong>Gastos de Administración: </strong> {{mostrar.banco?.gastosAdmin}} </li>
+                <li class="list-group-item"> <strong>Seguro desgravamen: </strong> {{mostrar.banco?.segDesgravamen}}% </li>
+                <li class="list-group-item"> <strong>Seguro riesgo: </strong> {{mostrar.banco?.segRiesgo}}% </li>
               </ul>
           </mat-card-content>
           <mat-card-actions class="justify-content-center">
-            <button mat-raised-button color="warn">Generar corrida</button>
+            <button mat-raised-button color="warn" (click)="addCorrida()" [disabled]="!run">Generar corrida</button>
           </mat-card-actions>
         </mat-card>
       </div>

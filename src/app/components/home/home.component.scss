@@ -1,11 +1,8 @@
-.container{
-    margin: 30px ;
-    font-size: large;
+.card{
+    max-width: 100% !important;
+    width: 100%;
 }
 
-.datos{
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.row{
+    margin: 25px ;
 }

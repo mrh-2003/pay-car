@@ -8,9 +8,11 @@ import { ListBankComponent } from './components/list-bank/list-bank.component';
 import { AddEditBankComponent } from './components/add-edit-bank/add-edit-bank.component';
 import { HistoryComponent } from './components/history/history.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ListRunComponent } from './components/list-run/list-run.component';
+import { LoginGuard } from './guards/login.guard';
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent},
+  {path: 'login', component: LoginComponent, canActivate:[LoginGuard] },
   {path: '', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
       {path: 'home', component: HomeComponent},
@@ -19,6 +21,7 @@ const routes: Routes = [
       {path: 'bank/add', component: AddEditBankComponent},
       {path: 'bank', component: ListBankComponent},
       {path: 'history', component: HistoryComponent},
+      {path: 'show-run/:id', component: ListRunComponent},
     ],
   },
   {path: '**', redirectTo: 'login', pathMatch: 'full'},
@@ -27,6 +30,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard]
+  providers: [AuthGuard, LoginGuard]
 })
 export class AppRoutingModule { }

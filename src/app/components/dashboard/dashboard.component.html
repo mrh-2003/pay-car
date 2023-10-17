@@ -4,7 +4,7 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar class="logo-container">
-      <img class="logo" src="../../../assets/img/logo.png" alt="">
+      <img class="logo" src="../../../assets/img/logo.png" alt="" routerLink="/home">
     </mat-toolbar>
     <mat-nav-list>
       <button mat-button routerLink="/home">

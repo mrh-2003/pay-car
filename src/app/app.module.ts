@@ -17,6 +17,7 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { HomeComponent } from './components/home/home.component';
 import { SmartCreditComponent } from './components/smart-credit/smart-credit.component';
 import { HistoryComponent } from './components/history/history.component';
+import { ListRunComponent } from './components/list-run/list-run.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { HistoryComponent } from './components/history/history.component';
     DashboardComponent,
     HomeComponent,
     SmartCreditComponent,
-    HistoryComponent
+    HistoryComponent,
+    ListRunComponent
   ],
   imports: [
     BrowserModule,

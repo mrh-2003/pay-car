@@ -1,0 +1,36 @@
+.row{
+    margin: 20px ;
+}
+
+.azul{
+    color: blue;
+}
+
+.rojo{
+    color: red;
+}
+
+
+
+.table-container {
+  max-height: 500px; /* Altura máxima de la tabla antes de que se desplace */
+  overflow: auto; /* Agrega barras de desplazamiento si es necesario */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+thead {
+  position: sticky;
+  top: 0; /* Fija el encabezado en la parte superior */
+  background-color: #f2f2f2;
+  z-index: 1; /* Asegura que el encabezado esté por encima del contenido */
+}
