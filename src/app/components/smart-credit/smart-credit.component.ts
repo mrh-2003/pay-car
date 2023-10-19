@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Banco } from 'src/app/models/banco';
 import { BancoService } from 'src/app/services/banco.service';
 import { CorridaService } from 'src/app/services/corrida.service';
@@ -18,7 +19,8 @@ export class SmartCreditComponent {
   constructor(private fb: FormBuilder,
     private corridaService: CorridaService,
     private auth: AngularFireAuth,
-    private bancoService: BancoService
+    private bancoService: BancoService,
+    private router : Router
     
     ){}
   ngOnInit(){
@@ -59,9 +61,13 @@ export class SmartCreditComponent {
   }
 
   getTasaEfectiva(data: any){
-    return (Math.pow(1 +  (data.tasa  / 100)/ 
-    (this.getDias(data.periodoTasa) / this.getDias(data.capiTasa)),
-    this.getDias(data.frecPago) / this.getDias(data.capiTasa)) - 1) * 100
+    if(data.tipoTasa == 'TN'){
+      return (Math.pow(1 +  (data.tasa  / 100)/ 
+      (this.getDias(data.periodoTasa) / this.getDias(data.capiTasa)),
+      this.getDias(data.frecPago) / this.getDias(data.capiTasa)) - 1) * 100
+    } else{
+      return (Math.pow(1+data.tasa/100, this.getDias(data.frecPago)/this.getDias(data.periodoTasa))-1)*100;
+    }
   }
 
   validateRun(){
@@ -72,16 +78,14 @@ export class SmartCreditComponent {
   async addCorrida(){
     const info = this.mostrar;
     //Filtramos solo lo que queremos guardar
-    const camposDeseados = ['moneda', 'precio', 'inicial', 'final', 'tasa', 'frecPago', 'plazo', 'COK', 'banco']
+    const camposDeseados = ['moneda', 'precio', 'inicial', 'final', 'frecPago', 'plazo', 'COK', 'banco']
     const corrida: any = {};
     for (const campo of camposDeseados) {
       corrida[campo] = info[campo];
     }
     corrida.fecha = new Date().toDateString();
     await this.auth.currentUser.then((response)=>corrida.idUsuario = response?.uid as string);
-    if(info.tipoTasa == "TN"){ //Calculamos la tasa efectiva
-      corrida.tasa = this.getTasaEfectiva(info)
-    }
+    corrida.tasa = this.getTasaEfectiva(info)
     corrida.gracia = []
     //Agregamos los periodos de gracia    
     for (let periodo = 0; periodo < info.plazo * 360 / this.getDias(info.frecPago); periodo++) {
@@ -94,7 +98,7 @@ export class SmartCreditComponent {
       }
     }    
     await this.corridaService.addCorrida(corrida)
-    .then((response)=> console.log(response))
+    .then((response)=> this.router.navigate(['show-run/'+response]))
     .catch((error)=> console.log(error)) 
   }
 }

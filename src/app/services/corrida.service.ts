@@ -9,9 +9,10 @@ export class CorridaService {
 
   constructor(private db: AngularFirestore) { }
 
-  addCorrida(corrida: Corrida){
+  async addCorrida(corrida: Corrida){
     corrida.id = this.db.createId()
-    return this.db.collection('corridas').doc(corrida.id).set(corrida);
+    await this.db.collection('corridas').doc(corrida.id).set(corrida)
+    return corrida.id;
   }
   deleteCorrida(id: string){
     return this.db.collection('corridas').doc(id).delete();

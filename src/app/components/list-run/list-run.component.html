@@ -1,5 +1,6 @@
 <div class="row">
     <p>Poner los egresos en rojo y los ingresos en azul</p>
+    <p>VAR: {{getVan()}}</p>
     <div class="col table-container">
         <table class="table table-striped">
             <thead>
@@ -21,7 +22,13 @@
             <tbody class="table-group-divider">
                 <tr *ngFor="let p of periodos; let i = index;">
                     <th scope="row">{{i}}</th>
-                    <td >{{getGracia(i)}}</td>
+                    <td >
+                        <select [disabled]="i == corrida.gracia.length" *ngIf="i != 0 && i != corrida.gracia.length + 1" disableRipple [(ngModel)]="corrida.gracia[i - 1]" (change)="seleccionCambiada()">
+                            <option value="Normal">Normal</option>
+                            <option value="Total">Total</option>
+                            <option value="Parcial">Parcial</option>
+                        </select>
+                    </td>
                     <td [ngClass]="formatearNumero(abs(p.saldo)).css">{{formatearNumero(abs(p.saldo)).valor}}</td>
                     <td [ngClass]="formatearNumero(-p.amort).css">{{formatearNumero(-p.amort > 0? 0: -p.amort).valor}}</td>
                     <td [ngClass]="formatearNumero(-p.interes).css"> {{formatearNumero(-p.interes).valor}}</td>
@@ -36,4 +43,6 @@
             </tbody>
         </table>
     </div>
+    <button mat-raised-button color="warn" (click)="updateData()" [disabled]="!cambio">Actualizar datos</button>
+
 </div>

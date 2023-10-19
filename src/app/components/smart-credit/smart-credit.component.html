@@ -27,7 +27,7 @@
           </mat-form-field>
             <mat-form-field appearance="fill"  >
                 <mat-label>Seleccione el tipo de tasa</mat-label>
-                <mat-select (valueChange)="true" disableRipple formControlName="tipoTasa">
+                <mat-select #tasa disableRipple formControlName="tipoTasa">
                   <mat-option value="TE">Tasa Efectiva</mat-option>
                   <mat-option value="TN">Tasa Nominal</mat-option>
                 </mat-select>
@@ -42,9 +42,9 @@
                   <mat-option value="Anual">Anual</mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field appearance="fill" *ngIf="true">
+            <mat-form-field appearance="fill" *ngIf="tasa.value == 'TN'">
                 <mat-label>Seleccione la capitalización</mat-label>
-                <mat-select disableRipple  formControlName="capiTasa">
+                <mat-select  disableRipple  formControlName="capiTasa">
                 
                   <mat-option value="Diaria">Diaria</mat-option>
                   <mat-option value="Mensual">Mensual</mat-option>
