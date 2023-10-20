@@ -13,12 +13,13 @@ export class ListRunComponent {
   corrida: Corrida = new Corrida();
   periodos: Periodo[] = []
   cambio = false
+  id: string = "";
   constructor(private corridaService: CorridaService, 
     private route: ActivatedRoute,
     private router: Router){}
   ngOnInit(){
-    const id = this.route.snapshot.params["id"]
-    this.corridaService.getCorrida(id).subscribe((data: Corrida)=> {
+    this.id = this.route.snapshot.params["id"]
+    this.corridaService.getCorrida(this.id).subscribe((data: Corrida)=> {
       this.corrida = data;
       this.generateData();
     });
@@ -31,9 +32,13 @@ export class ListRunComponent {
           this.corrida.banco.comEstudio + 
           this.corrida.banco.comActivacion;
   }
-  calcularCuota() {
+/*   calcularCuota() {
     const cuota = this.periodos[0].saldo - (this.corrida.precio *(this.corrida.final/100))/Math.pow(1+(this.corrida.tasa / 100 + this.getSegDesg()), this.corrida.gracia.length)
     return  cuota * ((this.corrida.tasa / 100 + this.getSegDesg())/ (1- Math.pow(1+(this.corrida.tasa / 100+ this.getSegDesg()), -this.corrida.gracia.length )))
+  } */
+  calcularCuota(periodo: Periodo, i : number) {
+    const cuota = periodo.saldo - (this.corrida.precio *(this.corrida.final/100))/Math.pow(1+(this.corrida.tasa / 100 + this.getSegDesg()), this.corrida.gracia.length - i)
+    return  cuota * ((this.corrida.tasa / 100 + this.getSegDesg())/ (1- Math.pow(1+(this.corrida.tasa / 100+ this.getSegDesg()), -(this.corrida.gracia.length - i) )))
   }
   seleccionCambiada() {
     this.periodos = []
@@ -53,12 +58,11 @@ export class ListRunComponent {
       saldo: this.calcularSaldoInicial(),
       flujo: this.calcularSaldoInicial(),
     })
-    let cuota = this.calcularCuota();
     for (let i = 0; i < this.corrida.gracia.length; i++) {
       const periodo: Periodo = new Periodo();
       periodo.interes = this.periodos[i].saldo * (this.corrida.tasa/100);
       periodo.segDes = this.getSegDesg() * this.periodos[i].saldo;
-      periodo.cuota = cuota;
+      periodo.cuota = this.calcularCuota(this.periodos[i], i);
       if(this.corrida.gracia[i] == "Total"){
         periodo.cuota = 0;
       }
@@ -67,7 +71,7 @@ export class ListRunComponent {
         periodo.amort = 0;
       }
       periodo.saldo = this.periodos[i].saldo - periodo.amort;
-      periodo.flujo = periodo.cuota + this.getSeguroRiesgo() + this.corrida.banco.portes + this.corrida.banco.gastosAdmin + this.corrida.banco.comPeriodica + this.corrida.banco.gastosAdmin
+      periodo.flujo = periodo.cuota + this.getSeguroRiesgo() + this.corrida.banco.portes + this.corrida.banco.gastosAdmin + this.corrida.banco.comPeriodica
       this.periodos.push(periodo);
     }
     const periodo: Periodo = new Periodo();
@@ -98,11 +102,36 @@ export class ListRunComponent {
 
   getVan(){
     let van = 0;
-    for (let i = 0; i < this.periodos.length; i++) {
-      const actual = this.periodos[i].flujo / Math.pow(1+ (this.corrida.COK/ 100) / (360 / this.getDias(this.corrida.frecPago)), i) -1;
-      van+= actual;
+    for (let i = 1; i < this.periodos.length; i++) {
+      van-= this.periodos[i].flujo / Math.pow(1+ (this.corrida.COK/ 100) / (360 / this.getDias(this.corrida.frecPago)), i);
+    }    
+    return van + this.calcularSaldoInicial();
+  }
+
+  getTIR(){
+    let tir = 0.1;
+    let nuevoTir = 1.1;
+    let error = 1;
+
+    while (error > 0.0001) {
+      let valorActualNeto = 0;
+      let derivadaValorActualNeto = 0;
+
+      for (let i = 0; i < this.periodos.length; i++) {
+        if(i == 0)
+          valorActualNeto -= this.periodos[i].flujo / Math.pow(1 + tir, i);
+        else
+          valorActualNeto += this.periodos[i].flujo / Math.pow(1 + tir, i);
+
+        derivadaValorActualNeto -= (i * this.periodos[i].flujo) / Math.pow(1 + tir, i + 1);
+      }
+
+      nuevoTir = tir - (valorActualNeto / derivadaValorActualNeto);
+      error = Math.abs((nuevoTir - tir) / nuevoTir);
+      tir = nuevoTir;
     }
-    return van;
+
+    return tir * 100;
   }
 
   getDias(periodo: string): number{
@@ -114,5 +143,9 @@ export class ListRunComponent {
       case "Anual": return 360; 
       default: return 1; 
     }
+  }
+
+  deleteData(){
+    this.corridaService.deleteCorrida(this.id).then(()=>this.router.navigate(["history"]));
   }
 }

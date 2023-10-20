@@ -1,6 +1,7 @@
 <div class="row">
     <p>Poner los egresos en rojo y los ingresos en azul</p>
     <p>VAR: {{getVan()}}</p>
+    <p>TIR: {{getTIR()}}</p>
     <div class="col table-container">
         <table class="table table-striped">
             <thead>
@@ -43,6 +44,10 @@
             </tbody>
         </table>
     </div>
-    <button mat-raised-button color="warn" (click)="updateData()" [disabled]="!cambio">Actualizar datos</button>
+    <div class="actions text-center">
+        <button mat-raised-button color="primary" (click)="updateData()" [disabled]="!cambio">Actualizar datos</button>
+        <button mat-raised-button color="warn" (click)="deleteData()">Eliminar corrida</button>
+
+    </div>
 
 </div>

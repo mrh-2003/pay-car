@@ -16,6 +16,7 @@ export class SmartCreditComponent {
   bancos: Banco[] = []
   mostrar :any= {};
   run: boolean = false;
+  
   constructor(private fb: FormBuilder,
     private corridaService: CorridaService,
     private auth: AngularFireAuth,

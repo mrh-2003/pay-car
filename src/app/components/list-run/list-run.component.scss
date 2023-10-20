@@ -13,7 +13,7 @@
 
 
 .table-container {
-  max-height: 500px; /* Altura máxima de la tabla antes de que se desplace */
+  max-height: 450px; /* Altura máxima de la tabla antes de que se desplace */
   overflow: auto; /* Agrega barras de desplazamiento si es necesario */
 }
 
@@ -33,4 +33,11 @@ thead {
   top: 0; /* Fija el encabezado en la parte superior */
   background-color: #f2f2f2;
   z-index: 1; /* Asegura que el encabezado esté por encima del contenido */
+}
+
+.actions{
+  margin-top: 10px;
+}
+.actions button{
+  margin: 0 10px 0 10px;
 }
