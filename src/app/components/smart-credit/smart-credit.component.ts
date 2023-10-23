@@ -35,7 +35,7 @@ export class SmartCreditComponent {
         tipoTasa: ['', Validators.required],
         periodoTasa: ['', Validators.required],
         capiTasa: '',
-        tasa: ['',[Validators.required, Validators.min(1)]],
+        tasa: ['',[Validators.required, Validators.min(0)]],
         frecPago: ['', Validators.required],
         plazo: ['',[Validators.required, Validators.min(1)]],
         graciaParcial: ['', Validators.min(0)],

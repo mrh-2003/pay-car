@@ -1,8 +1,83 @@
 <div class="row">
-    <p>Poner los egresos en rojo y los ingresos en azul</p>
-    <p>VAR: {{getVan()}}</p>
-    <p>TIR: {{getTIR()}}</p>
-    <div class="col table-container">
+    <div class="col-12">
+        <mat-card class="card">
+            <mat-card-header class="justify-content-center">
+                <mat-card-title>Resumen de la corrida</mat-card-title>
+            </mat-card-header>
+            <div class="row">
+                <div class="col-6">
+                    <mat-card-header class="justify-content-center">
+                        <mat-card-subtitle>Datos de la corrida</mat-card-subtitle>
+                    </mat-card-header>
+                    <mat-card-content class="izquierda">
+                        <ul class="list-group">
+                            <li class="list-group-item"> <strong>Moneda: </strong> {{corrida.moneda }} </li>
+                            <li class="list-group-item"> <strong>Valor del vehiculo: </strong> {{corrida.precio}} </li>
+                            <li class="list-group-item"> <strong>Cuota inicial: </strong> {{corrida.inicial}}% </li>
+                            <li class="list-group-item"> <strong>Valor cuota inicial: </strong> {{
+                                (corrida.inicial / 100) * corrida.precio}} </li>
+                            <li class="list-group-item"> <strong>Cuota final: </strong> {{corrida.final}}% </li>
+                            <li class="list-group-item"> <strong>Valor cuota final: </strong> {{ (
+                                corrida.final / 100) * corrida.precio}} </li>
+                            <li class="list-group-item"> <strong>Tasa Efectiva {{corrida.frecPago}}: </strong> {{corrida.tasa}}% </li>
+                            <li class="list-group-item"> <strong>Frecuencia de pago: </strong> {{corrida.frecPago}}
+                            </li> 
+                            <li class="list-group-item"> <strong>Plazo: </strong> {{corrida.plazo}} años</li>
+                            <li class="list-group-item"> <strong>Cantidad cuotas: </strong> {{
+                                corrida.plazo * 360 / getDias(corrida.frecPago)}}</li>
+                            <li class="list-group-item"> <strong>Costo oportunidad: </strong> {{corrida.COK}}% </li>
+                        </ul>
+                    </mat-card-content>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <mat-card-header class="justify-content-center">
+                            <mat-card-subtitle>Datos de la entidad financiera</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content class="izquierda">
+                            <ul class="list-group">
+                                <li class="list-group-item"> <strong>Nombre: </strong> {{corrida.banco.nombre}} </li>
+                                <li class="list-group-item"> <strong>Costes Notariales: </strong>
+                                    {{corrida.banco.cosNotariales}}
+                                </li>
+                                <li class="list-group-item"> <strong>Costes Registrales: </strong>
+                                    {{corrida.banco.cosRegistrales}}
+                                </li>
+                                <li class="list-group-item"> <strong>Tasación: </strong> {{corrida.banco.tasacion}}
+                                </li>
+                                <li class="list-group-item"> <strong>Comisión de estudio: </strong>
+                                    {{corrida.banco.comEstudio}}
+                                </li>
+                                <li class="list-group-item"> <strong>Comisión activación: </strong>
+                                    {{corrida.banco.comActivacion}}
+                                </li>
+                                <li class="list-group-item"> <strong>Seguro desgravamen: </strong>
+                                    {{corrida.banco.segDesgravamen}}% </li>
+                                <li class="list-group-item"> <strong>Seguro riesgo: </strong>
+                                    {{corrida.banco.segRiesgo}}% </li>
+                            </ul>
+                        </mat-card-content>
+                    </div>
+                    <div>
+                        <mat-card-header class="justify-content-center">
+                            <mat-card-subtitle>Indicadores de rentabilidad</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content class="izquierda">
+                            <ul class="list-group">
+                                <li class="list-group-item"> <strong>VAN: </strong> {{getVan()}} </li>
+                                <li class="list-group-item"> <strong>TIR: </strong> {{getTIR()}}
+                                </li>
+                            </ul>
+                        </mat-card-content>
+                    </div>
+                </div>
+            </div>
+            <mat-card-actions class="justify-content-center">
+                <button mat-raised-button color="warn" (click)="true" [disabled]="false">Generar corrida</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+    <div class="col-12 table-container">
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -23,23 +98,33 @@
             <tbody class="table-group-divider">
                 <tr *ngFor="let p of periodos; let i = index;">
                     <th scope="row">{{i}}</th>
-                    <td >
-                        <select [disabled]="i == corrida.gracia.length" *ngIf="i != 0 && i != corrida.gracia.length + 1" disableRipple [(ngModel)]="corrida.gracia[i - 1]" (change)="seleccionCambiada()">
+                    <td>
+                        <select [disabled]="i == corrida.gracia.length" *ngIf="i != 0 && i != corrida.gracia.length + 1"
+                            disableRipple [(ngModel)]="corrida.gracia[i - 1]" (change)="seleccionCambiada()">
                             <option value="Normal">Normal</option>
                             <option value="Total">Total</option>
                             <option value="Parcial">Parcial</option>
                         </select>
                     </td>
                     <td [ngClass]="formatearNumero(abs(p.saldo)).css">{{formatearNumero(abs(p.saldo)).valor}}</td>
-                    <td [ngClass]="formatearNumero(-p.amort).css">{{formatearNumero(-p.amort > 0? 0: -p.amort).valor}}</td>
+                    <td [ngClass]="formatearNumero(-p.amort).css">{{formatearNumero(-p.amort > 0? 0: -p.amort).valor}}
+                    </td>
                     <td [ngClass]="formatearNumero(-p.interes).css"> {{formatearNumero(-p.interes).valor}}</td>
                     <td [ngClass]="formatearNumero(-p.segDes).css">{{formatearNumero(-p.segDes).valor}}</td>
                     <td [ngClass]="formatearNumero(-p.cuota).css">{{formatearNumero(-p.cuota).valor}}</td>
-                    <td [ngClass]="formatearNumero(i!=0 && i != periodos.length - 1 ? -getSeguroRiesgo() : 0).css">{{formatearNumero(i!=0 && i != periodos.length - 1 ? -getSeguroRiesgo() : 0).valor}}</td>
-                    <td [ngClass]="formatearNumero(i!=0 && i != periodos.length - 1? -corrida.banco.comPeriodica : 0).css">{{formatearNumero(i!=0 && i != periodos.length - 1? -corrida.banco.comPeriodica : 0).valor}}</td>
-                    <td [ngClass]="formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.portes : 0).css">{{formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.portes : 0).valor}}</td>
-                    <td [ngClass]="formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.gastosAdmin : 0).css">{{formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.gastosAdmin : 0).valor}}</td>
-                    <td [ngClass]="formatearNumero(i == 0? p.flujo : -p.flujo).css" >{{formatearNumero(i == 0? p.flujo : -p.flujo).valor}}</td>
+                    <td [ngClass]="formatearNumero(i!=0 && i != periodos.length - 1 ? -getSeguroRiesgo() : 0).css">
+                        {{formatearNumero(i!=0 && i != periodos.length - 1 ? -getSeguroRiesgo() : 0).valor}}</td>
+                    <td
+                        [ngClass]="formatearNumero(i!=0 && i != periodos.length - 1? -corrida.banco.comPeriodica : 0).css">
+                        {{formatearNumero(i!=0 && i != periodos.length - 1? -corrida.banco.comPeriodica : 0).valor}}
+                    </td>
+                    <td [ngClass]="formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.portes : 0).css">
+                        {{formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.portes : 0).valor}}</td>
+                    <td
+                        [ngClass]="formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.gastosAdmin : 0).css">
+                        {{formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.gastosAdmin : 0).valor}}</td>
+                    <td [ngClass]="formatearNumero(i == 0? p.flujo : -p.flujo).css">{{formatearNumero(i == 0? p.flujo :
+                        -p.flujo).valor}}</td>
                 </tr>
             </tbody>
         </table>

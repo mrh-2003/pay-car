@@ -18,6 +18,8 @@ import { HomeComponent } from './components/home/home.component';
 import { SmartCreditComponent } from './components/smart-credit/smart-credit.component';
 import { HistoryComponent } from './components/history/history.component';
 import { ListRunComponent } from './components/list-run/list-run.component';
+import { CloseDialogComponent } from './components/close-dialog/close-dialog.component';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { ListRunComponent } from './components/list-run/list-run.component';
     HomeComponent,
     SmartCreditComponent,
     HistoryComponent,
-    ListRunComponent
+    ListRunComponent,
+    CloseDialogComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserModule,
