@@ -5,6 +5,8 @@ import { Corrida } from 'src/app/models/corrida';
 import { Periodo } from 'src/app/models/periodo';
 import { CorridaService } from 'src/app/services/corrida.service';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
+import { OptionsDialogComponent } from '../options-dialog/options-dialog.component';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-list-run',
@@ -14,7 +16,8 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 export class ListRunComponent {
   corrida: Corrida = new Corrida();
   periodos: Periodo[] = []
-  cambio = false
+  cambio = false;
+  actions !: string;
   id: string = "";
   constructor(private corridaService: CorridaService,
     private route: ActivatedRoute,
@@ -25,6 +28,11 @@ export class ListRunComponent {
     this.corridaService.getCorrida(this.id).subscribe((data: Corrida) => {
       if (data && this.corrida.id != data.id) {
         this.corrida = data;
+        if (this.corrida.status == 'normal') {
+          this.actions = "Comprar"
+        } else {
+          this.actions = "Finalizar corrida";
+        }
         this.generateData();
       }
     });
@@ -49,6 +57,9 @@ export class ListRunComponent {
     this.periodos = []
     this.generateData()
     this.cambio = true
+  }
+  round(num: number) {
+    return num.toFixed(2);
   }
   updateData() {
     this.corridaService.updateCorrida(this.corrida);
@@ -83,7 +94,7 @@ export class ListRunComponent {
     const periodo: Periodo = new Periodo();
     periodo.cuota = this.corrida.precio * (this.corrida.final / 100)
     periodo.interes = 0;
-    periodo.segDes = 0;
+    periodo.segDes = this.getSegDesg() * this.periodos[this.corrida.gracia.length].saldo;
     periodo.amort = periodo.cuota;
     periodo.saldo = this.periodos[this.corrida.gracia.length].saldo - periodo.amort;
     periodo.flujo = periodo.cuota
@@ -149,6 +160,42 @@ export class ListRunComponent {
       case "Semestral": return 180;
       case "Anual": return 360;
       default: return 1;
+    }
+  }
+
+  buyCorrida() {
+    if (this.corrida.status == "normal") {
+      this.actions = "Finalizar corrida";
+      this.corrida.status = "cliente";
+      this.corridaService.updateCorrida(this.corrida);
+    } else {
+      this.dialog.open(OptionsDialogComponent, {
+        width: '500px'
+      }).afterClosed().subscribe((response) => {
+        if (response) {
+          this.dialog.open(ConfirmDialogComponent, {
+            width: '500px'
+          }).afterClosed().subscribe((confirm) => {
+            if (confirm) {
+              switch (response) {
+                case 1:
+                  
+                  this.corrida.status = "renovar";
+                  this.corridaService.updateCorrida(this.corrida);
+                  break;
+                case 2:
+                  this.corrida.status = "comprar";
+                  this.corridaService.updateCorrida(this.corrida);
+                  break;
+                case 3:
+                  this.corrida.status = "cancelar";
+                  this.corridaService.updateCorrida(this.corrida);
+                  break;
+              }
+            }
+          })
+        }
+      })
     }
   }
 

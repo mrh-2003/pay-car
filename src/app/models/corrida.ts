@@ -13,6 +13,9 @@ export class Corrida {
     plazo: number = 0; 
     COK: number = 0; 
     gracia : string[] = [];
+    status: string = "";
+    idReference : string = ""; //el id del antigua corrida
+    montoActual : number = 0; //valor actual del vehiculo - cuota(seg des + interes+amort)
     idUsuario: string = "";
-    banco: Banco = new Banco(); 
+    banco: Banco = new Banco();
 }

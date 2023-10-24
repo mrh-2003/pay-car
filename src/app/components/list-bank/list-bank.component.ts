@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Banco } from 'src/app/models/banco';
 import { BancoService } from 'src/app/services/banco.service';
+import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 @Component({
   selector: 'app-list-bank',
   templateUrl: './list-bank.component.html',
@@ -16,7 +18,8 @@ export class ListBankComponent {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private bancoService: BancoService) {}
+  constructor(private bancoService: BancoService,
+    public dialog: MatDialog) {}
 
   ngOnInit(){
     this.showBanks();
@@ -39,6 +42,12 @@ export class ListBankComponent {
     }
   }
   deleteBank(id: string){
-    this.bancoService.deleteBanco(id);
+    this.dialog.open(DeleteDialogComponent, {
+      width: '500px'
+    }).afterClosed().subscribe((response) => {
+      if (response) {
+        this.bancoService.deleteBanco(id);
+      }
+    })
   }
 }

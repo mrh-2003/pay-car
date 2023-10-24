@@ -20,6 +20,8 @@ import { HistoryComponent } from './components/history/history.component';
 import { ListRunComponent } from './components/list-run/list-run.component';
 import { CloseDialogComponent } from './components/close-dialog/close-dialog.component';
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import { OptionsDialogComponent } from './components/options-dialog/options-dialog.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,9 @@ import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.
     HistoryComponent,
     ListRunComponent,
     CloseDialogComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    ConfirmDialogComponent,
+    OptionsDialogComponent
   ],
   imports: [
     BrowserModule,

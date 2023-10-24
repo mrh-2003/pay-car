@@ -42,4 +42,18 @@ export class HistoryComponent {
       this.dataSource.paginator.firstPage();
     }
   }
+  getRowClass(status: string){
+    switch (status) {
+      case 'comprar':
+        return 'comprar-row';
+      case 'renovar':
+        return 'renovar-row';
+      case 'cancelar':
+        return 'cancelar-row';
+      case 'cliente':
+        return 'cliente-row';
+      default:
+        return '';
+    }
+  }
 }

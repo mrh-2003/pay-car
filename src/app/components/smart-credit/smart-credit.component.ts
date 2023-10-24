@@ -87,6 +87,7 @@ export class SmartCreditComponent {
     corrida.fecha = new Date().toDateString();
     await this.auth.currentUser.then((response)=>corrida.idUsuario = response?.uid as string);
     corrida.tasa = this.getTasaEfectiva(info)
+    corrida.status = "normal";
     corrida.gracia = []
     //Agregamos los periodos de gracia    
     for (let periodo = 0; periodo < info.plazo * 360 / this.getDias(info.frecPago); periodo++) {

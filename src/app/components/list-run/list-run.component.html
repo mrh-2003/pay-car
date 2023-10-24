@@ -19,7 +19,7 @@
                             <li class="list-group-item"> <strong>Cuota final: </strong> {{corrida.final}}% </li>
                             <li class="list-group-item"> <strong>Valor cuota final: </strong> {{ (
                                 corrida.final / 100) * corrida.precio}} </li>
-                            <li class="list-group-item"> <strong>Tasa Efectiva {{corrida.frecPago}}: </strong> {{corrida.tasa}}% </li>
+                            <li class="list-group-item"> <strong>Tasa Efectiva {{corrida.frecPago}}: </strong> {{round(corrida.tasa)}}% </li>
                             <li class="list-group-item"> <strong>Frecuencia de pago: </strong> {{corrida.frecPago}}
                             </li> 
                             <li class="list-group-item"> <strong>Plazo: </strong> {{corrida.plazo}} años</li>
@@ -64,16 +64,16 @@
                         </mat-card-header>
                         <mat-card-content class="izquierda">
                             <ul class="list-group">
-                                <li class="list-group-item"> <strong>VAN: </strong> {{getVan()}} </li>
-                                <li class="list-group-item"> <strong>TIR: </strong> {{getTIR()}}
+                                <li class="list-group-item"> <strong>VAN: </strong> {{round(getVan())}} </li>
+                                <li class="list-group-item"> <strong>TIR: </strong> {{round(getTIR())}}%
                                 </li>
                             </ul>
                         </mat-card-content>
                     </div>
                 </div>
             </div>
-            <mat-card-actions class="justify-content-center">
-                <button mat-raised-button color="warn" (click)="true" [disabled]="false">Generar corrida</button>
+            <mat-card-actions *ngIf="corrida.status == 'normal' || corrida.status == 'cliente'"  class="justify-content-center">
+                <button mat-raised-button color="warn" (click)="buyCorrida()" >{{actions}}</button>
             </mat-card-actions>
         </mat-card>
     </div>
@@ -130,9 +130,8 @@
         </table>
     </div>
     <div class="actions text-center">
-        <button mat-raised-button color="primary" (click)="updateData()" [disabled]="!cambio">Actualizar datos</button>
-        <button mat-raised-button color="warn" (click)="deleteData()">Eliminar corrida</button>
-
+        <button mat-raised-button *ngIf="corrida.status == 'normal' || corrida.status == 'cliente'" color="primary" (click)="updateData()" [disabled]="!cambio">Actualizar datos</button>
+        <button mat-raised-button *ngIf="corrida.status == 'normal'" color="warn" (click)="deleteData()">Eliminar corrida</button>
     </div>
 
 </div>
