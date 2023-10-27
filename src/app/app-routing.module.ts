@@ -16,8 +16,8 @@ import { CompareBanksComponent } from './components/compare-banks/compare-banks.
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent, canActivate:[LoginGuard] },
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: '', component: DashboardComponent, canActivate: [AuthGuard],
+  {path: 'a', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'a', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
       {path: 'home', component: HomeComponent},
       {path: 'run', component: SmartCreditComponent},
@@ -34,7 +34,7 @@ const routes: Routes = [
       {path: 'show-run/:id', component: ListRunComponent},
     ],
   },
-  {path: '**', redirectTo: 'login', pathMatch: 'full'},
+  {path: 'a', redirectTo: 'login', pathMatch: 'full'},
 ];
 
 @NgModule({
