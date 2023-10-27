@@ -7,6 +7,7 @@ import { CorridaService } from 'src/app/services/corrida.service';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { OptionsDialogComponent } from '../options-dialog/options-dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { PriceDialogComponent } from '../price-dialog/price-dialog.component';
 
 @Component({
   selector: 'app-list-run',
@@ -28,6 +29,9 @@ export class ListRunComponent {
     this.corridaService.getCorrida(this.id).subscribe((data: Corrida) => {
       if (data && this.corrida.id != data.id) {
         this.corrida = data;
+        if (this.corrida.montoReference) {
+          this.corrida.precio = this.corrida.precio - this.corrida.montoReference;
+        }
         if (this.corrida.status == 'normal') {
           this.actions = "Comprar"
         } else {
@@ -38,6 +42,7 @@ export class ListRunComponent {
     });
   }
   calcularSaldoInicial() {
+
     return this.corrida.precio * (1 - (this.corrida.inicial / 100)) +
       this.corrida.banco.cosNotariales +
       this.corrida.banco.cosRegistrales +
@@ -62,8 +67,13 @@ export class ListRunComponent {
     return num.toFixed(2);
   }
   updateData() {
+    this.corrida.precio = this.corrida.precio + this.corrida.montoReference;
     this.corridaService.updateCorrida(this.corrida);
     this.router.navigate(["history"])
+  }
+
+  actualizar() {
+    this.router.navigate(["show-run/" + this.corrida.idReference]).then(() => this.ngOnInit())
   }
   generateData() {
     this.periodos.push({
@@ -92,7 +102,7 @@ export class ListRunComponent {
       this.periodos.push(periodo);
     }
     const periodo: Periodo = new Periodo();
-    periodo.cuota = this.corrida.precio * (this.corrida.final / 100)
+    periodo.cuota = this.corrida.precio * (this.corrida.final / 100) // sumarle intereses y sumarle seguro de desgravamen
     periodo.interes = 0;
     periodo.segDes = this.getSegDesg() * this.periodos[this.corrida.gracia.length].saldo;
     periodo.amort = periodo.cuota;
@@ -167,7 +177,8 @@ export class ListRunComponent {
     if (this.corrida.status == "normal") {
       this.actions = "Finalizar corrida";
       this.corrida.status = "cliente";
-      this.corridaService.updateCorrida(this.corrida);
+      this.corrida.precio = this.corrida.precio + this.corrida.montoReference;
+      this.corridaService.updateCorrida(this.corrida); //el precio volverlo al valor original
     } else {
       this.dialog.open(OptionsDialogComponent, {
         width: '500px'
@@ -177,11 +188,18 @@ export class ListRunComponent {
             width: '500px'
           }).afterClosed().subscribe((confirm) => {
             if (confirm) {
+              this.corrida.precio = this.corrida.precio + this.corrida.montoReference;
               switch (response) {
                 case 1:
-                  
-                  this.corrida.status = "renovar";
-                  this.corridaService.updateCorrida(this.corrida);
+                  this.dialog.open(PriceDialogComponent, {
+                    width: '300px'
+                  }).afterClosed().subscribe((confirm) => {
+                    if (confirm) {
+                      this.corrida.montoActual = confirm - this.periodos[this.periodos.length - 1].cuota;
+                      this.corridaService.updateCorrida(this.corrida);
+                      this.router.navigate(['run/' + this.corrida.id])
+                    }
+                  });
                   break;
                 case 2:
                   this.corrida.status = "comprar";

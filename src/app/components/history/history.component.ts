@@ -12,17 +12,17 @@ import { CorridaService } from 'src/app/services/corrida.service';
   styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent {
-  displayedColumns: string[] = ['fecha' ,'moneda', 'precio', 'tasa', 'frecPago', 'plazo', 'banco', 'actions'];
+  displayedColumns: string[] = ['fecha', 'moneda', 'precio', 'tasa', 'frecPago', 'plazo', 'banco', 'actions'];
   dataSource = new MatTableDataSource<Corrida>();
   idUser!: string;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  constructor(private corridaService: CorridaService, private auth: AngularFireAuth){}
-  ngOnInit(){
+  constructor(private corridaService: CorridaService, private auth: AngularFireAuth) { }
+  ngOnInit() {
     this.showCorridas();
   }
-  async showCorridas(){
-    await this.auth.currentUser.then((response)=>this.idUser = response?.uid as string);
+  async showCorridas() {
+    await this.auth.currentUser.then((response) => this.idUser = response?.uid as string);
     this.corridaService.getCorridasByUserID(this.idUser).subscribe((corridas: Corrida[]) => {
       this.dataSource = new MatTableDataSource(corridas);
       this.dataSource.paginator = this.paginator;
@@ -30,7 +30,7 @@ export class HistoryComponent {
     })
   }
 
-  round(numero: number){
+  round(numero: number) {
     return numero.toFixed(2)
   }
 
@@ -42,7 +42,7 @@ export class HistoryComponent {
       this.dataSource.paginator.firstPage();
     }
   }
-  getRowClass(status: string){
+  getRowClass(status: string) {
     switch (status) {
       case 'comprar':
         return 'comprar-row';
@@ -53,7 +53,7 @@ export class HistoryComponent {
       case 'cliente':
         return 'cliente-row';
       default:
-        return '';
+        return 'normal-row';
     }
   }
 }

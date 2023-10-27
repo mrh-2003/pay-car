@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Banco } from 'src/app/models/banco';
+import { Corrida } from 'src/app/models/corrida';
 import { BancoService } from 'src/app/services/banco.service';
 import { CorridaService } from 'src/app/services/corrida.service';
+import { VehiculoService } from 'src/app/services/vehiculo.service';
 
 @Component({
   selector: 'app-smart-credit',
@@ -16,15 +18,26 @@ export class SmartCreditComponent {
   bancos: Banco[] = []
   mostrar :any= {};
   run: boolean = false;
-  
+  id!: string;
+  idCar!: string;
+  soloLeer = false
+  reference : any =  {};
   constructor(private fb: FormBuilder,
     private corridaService: CorridaService,
     private auth: AngularFireAuth,
     private bancoService: BancoService,
-    private router : Router
-    
+    private router : Router,
+    private route: ActivatedRoute,
+    private vehiculoService: VehiculoService
     ){}
-  ngOnInit(){
+  async ngOnInit(){
+    if(this.route.snapshot.url.length == 2){
+      this.id = this.route.snapshot.params["id"];
+    }
+    if(this.id){
+      this.corridaService.getCorrida(this.id).subscribe(
+        (data: Corrida)=> this.reference = data )
+    }
     this.bancoService.getBancos().subscribe((datos: Banco[])=> this.bancos = datos);
     this.form = this.fb.group(
       {
@@ -44,6 +57,32 @@ export class SmartCreditComponent {
         banco: ['', Validators.required],
       }
     )
+    if(this.route.snapshot.url.length == 3){
+      this.idCar = this.route.snapshot.params["idCar"];
+      await this.vehiculoService.getVehiculo(this.idCar).subscribe(
+        (response)=> {
+          this.mostrar.moneda = response.moneda;
+          this.soloLeer = true;
+          this.form = this.fb.group(
+            {
+              moneda : [{value: response.moneda, disabled: true},Validators.required],
+              precio : [response.precio * (1 -  response.descuento / 100),[Validators.required, Validators.min(1000)]],
+              inicial : [response.inicial, [Validators.required, Validators.min(15), Validators.max(25)]],
+              final:['', [Validators.required, Validators.min(40), Validators.max(60)]],
+              tipoTasa: ['', Validators.required],
+              periodoTasa: ['', Validators.required],
+              capiTasa: '',
+              tasa: ['',[Validators.required, Validators.min(0)]],
+              frecPago: ['', Validators.required],
+              plazo: ['',[Validators.required, Validators.min(1)]],
+              graciaParcial: ['', Validators.min(0)],
+              graciaTotal: ['', Validators.min(0)],
+              COK: ['', [Validators.required, Validators.min(1)]],
+              banco: ['', Validators.required],
+            })
+        }
+      )
+    }
   }
 
   getDias(periodo: string): number{
@@ -72,7 +111,10 @@ export class SmartCreditComponent {
   }
 
   validateRun(){
-    this.run = true;
+    this.run = true;  
+    if(this.mostrar.moneda){
+      this.form.value.moneda = this.mostrar.moneda;
+    }
     this.mostrar = this.form.value;
   }
 
@@ -98,9 +140,17 @@ export class SmartCreditComponent {
       } else{
         corrida.gracia.push("Normal");
       }
-    }    
+    }
+    corrida.montoReference = 0;
+    if(this.id){
+      corrida.idReference = this.id;
+      corrida.montoReference = this.reference.montoActual;
+      this.reference.status = "renovar";
+      corrida.status = "cliente";
+      await this.corridaService.updateCorrida(this.reference);
+    }
     await this.corridaService.addCorrida(corrida)
-    .then((response)=> this.router.navigate(['show-run/'+response]))
+    .then( (response)=>  this.router.navigate(['show-run/'+response]))   
     .catch((error)=> console.log(error)) 
   }
 }

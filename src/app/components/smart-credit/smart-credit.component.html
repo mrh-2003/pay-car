@@ -11,14 +11,14 @@
                 </mat-select>
             </mat-form-field>
             
-            <mat-form-field appearance="fill">
+            <mat-form-field appearance="fill" >
                 <mat-label>Ingrese el valor del vehiculo</mat-label>
-                <input type="number" formControlName="precio" matInput>
+                <input type="number" formControlName="precio" matInput [readonly]="soloLeer">
             </mat-form-field>
             <mat-form-field appearance="fill">
                 <mat-label>Ingrese el % de la cuota inicial
                 </mat-label>
-                <input type="number" matInput formControlName="inicial" >
+                <input type="number" matInput formControlName="inicial" [readonly]="soloLeer">
             </mat-form-field>
             <mat-form-field appearance="fill">
               <mat-label>Ingrese el % de la cuota final
@@ -114,6 +114,7 @@
               <ul class="list-group">
                 <li class="list-group-item"> <strong>Moneda: </strong> {{mostrar.moneda }} </li>
                 <li class="list-group-item"> <strong>Valor del vehiculo: </strong> {{mostrar.precio}} </li>
+                <li class="list-group-item"*ngIf="id" > <strong>Valor guardado: </strong> {{ reference.montoActual}} </li>
                 <li class="list-group-item"> <strong>Cuota inicial: </strong> {{mostrar.inicial}}% </li>
                 <li class="list-group-item"> <strong>Valor cuota inicial: </strong> {{mostrar.precio != null? (mostrar.inicial / 100) * mostrar.precio : ""}} </li>
                 <li class="list-group-item"> <strong>Cuota final: </strong> {{mostrar.final}}% </li>

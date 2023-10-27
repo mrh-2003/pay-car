@@ -12,7 +12,9 @@
                     <mat-card-content class="izquierda">
                         <ul class="list-group">
                             <li class="list-group-item"> <strong>Moneda: </strong> {{corrida.moneda }} </li>
-                            <li class="list-group-item"> <strong>Valor del vehiculo: </strong> {{corrida.precio}} </li>
+                            <li class="list-group-item"> <strong>Valor del vehiculo: </strong> {{corrida.montoReference ? corrida.precio + corrida.montoReference : corrida.precio}} </li>
+                            <li class="list-group-item" *ngIf="corrida.montoReference"> <strong>Valor de referencia: </strong> {{corrida.montoReference}} </li>
+                            <li class="list-group-item"> <strong>Monto a financiar: </strong> {{corrida.precio}} </li>
                             <li class="list-group-item"> <strong>Cuota inicial: </strong> {{corrida.inicial}}% </li>
                             <li class="list-group-item"> <strong>Valor cuota inicial: </strong> {{
                                 (corrida.inicial / 100) * corrida.precio}} </li>
@@ -69,6 +71,9 @@
                                 </li>
                             </ul>
                         </mat-card-content>
+                        <mat-card-header *ngIf="corrida.idReference" class="justify-content-center">
+                            <button mat-raised-button (click)="actualizar()" color="primary" >Referencia</button>
+                        </mat-card-header>
                     </div>
                 </div>
             </div>
@@ -131,7 +136,7 @@
     </div>
     <div class="actions text-center">
         <button mat-raised-button *ngIf="corrida.status == 'normal' || corrida.status == 'cliente'" color="primary" (click)="updateData()" [disabled]="!cambio">Actualizar datos</button>
-        <button mat-raised-button *ngIf="corrida.status == 'normal'" color="warn" (click)="deleteData()">Eliminar corrida</button>
+        <button mat-raised-button *ngIf="corrida.status == 'normal' && !corrida.idReference" color="warn" (click)="deleteData()">Eliminar corrida</button>
     </div>
 
 </div>

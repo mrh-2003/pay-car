@@ -1,5 +1,4 @@
 import { Banco } from "./banco";
-import { PeriodoGracia } from "./periodoGracia";
 
 export class Corrida {
     id: string  ="";
@@ -16,6 +15,7 @@ export class Corrida {
     status: string = "";
     idReference : string = ""; //el id del antigua corrida
     montoActual : number = 0; //valor actual del vehiculo - cuota(seg des + interes+amort)
+    montoReference: number= 0; //De la antigua corrida
     idUsuario: string = "";
     banco: Banco = new Banco();
 }

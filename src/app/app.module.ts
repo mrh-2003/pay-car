@@ -22,6 +22,10 @@ import { CloseDialogComponent } from './components/close-dialog/close-dialog.com
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { OptionsDialogComponent } from './components/options-dialog/options-dialog.component';
+import { PriceDialogComponent } from './components/price-dialog/price-dialog.component';
+import { ListCarComponent } from './components/list-car/list-car.component';
+import { AddEditCarComponent } from './components/add-edit-car/add-edit-car.component';
+import { CompareBanksComponent } from './components/compare-banks/compare-banks.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +41,11 @@ import { OptionsDialogComponent } from './components/options-dialog/options-dial
     CloseDialogComponent,
     DeleteDialogComponent,
     ConfirmDialogComponent,
-    OptionsDialogComponent
+    OptionsDialogComponent,
+    PriceDialogComponent,
+    ListCarComponent,
+    AddEditCarComponent,
+    CompareBanksComponent
   ],
   imports: [
     BrowserModule,
