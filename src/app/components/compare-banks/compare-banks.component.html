@@ -1,30 +1,32 @@
 <div class="row">
     <div class="col-6">
         <div class="card" style="width: 18rem;">
-            <img src="..." class="card-img-top" alt="...">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
+                <h2 class="card-title">{{paycar.nombre}}</h2>
+                <p class="card-text">Nuestra financiera tiene grandes ventajas respecto a nuestros competidores.</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
-            </ul>
-            <div class="card-body">
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-            </div>
+                <li class="list-group-item"> <strong>Nombre: </strong> {{paycar.nombre}} </li>
+                <li class="list-group-item"> <strong>Costes Notariales: </strong> {{paycar.cosNotariales}} </li>
+                <li class="list-group-item"> <strong>Costes Registrales: </strong> {{paycar.cosRegistrales}} </li>
+                <li class="list-group-item"> <strong>Tasación: </strong> {{paycar.tasacion}} </li>
+                <li class="list-group-item"> <strong>Comisión de estudio: </strong> {{paycar.comEstudio}} </li>
+                <li class="list-group-item"> <strong>Comisión activación: </strong> {{paycar.comActivacion}} </li>
+                <li class="list-group-item"> <strong>Comisión periodica: </strong> {{paycar.comPeriodica}} </li>
+                <li class="list-group-item"> <strong>Portes: </strong> {{paycar.portes}} </li>
+                <li class="list-group-item"> <strong>Gastos de Administración: </strong> {{paycar.gastosAdmin}} </li>
+                <li class="list-group-item"> <strong>Seguro desgravamen: </strong> {{paycar.segDesgravamen}}% </li>
+                <li class="list-group-item"> <strong>Seguro riesgo: </strong> {{paycar.segRiesgo}}% </li>
+              </ul>
         </div>
     </div>
     <div class="col-6">
         <cdk-accordion class="example-accordion">
-            <cdk-accordion-item *ngFor="let item of items; let index = index;" #accordionItem="cdkAccordionItem"
+            <cdk-accordion-item *ngFor="let bank of bancos; let index = index;" #accordionItem="cdkAccordionItem"
                 class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
                 [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
                 <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
-                    {{ item }}
+                    {{ bank.nombre }}
                     <span class="example-accordion-item-description">
                         Click to {{ accordionItem.expanded ? 'close' : 'open' }}
                     </span>
@@ -34,21 +36,19 @@
                     [attr.aria-labelledby]="'accordion-header-' + index">
 
                     <div class="card" style="width: 18rem;">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk
-                                of the card's content.</p>
-                        </div>
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">An item</li>
-                            <li class="list-group-item">A second item</li>
-                            <li class="list-group-item">A third item</li>
-                        </ul>
-                        <div class="card-body">
-                            <a href="#" class="card-link">Card link</a>
-                            <a href="#" class="card-link">Another link</a>
-                        </div>
+                            <li class="list-group-item"> <strong>Nombre: </strong> {{bank.nombre}} </li>
+                            <li class="list-group-item"> <strong>Costes Notariales: </strong> {{bank.cosNotariales}} </li>
+                            <li class="list-group-item"> <strong>Costes Registrales: </strong> {{bank.cosRegistrales}} </li>
+                            <li class="list-group-item"> <strong>Tasación: </strong> {{bank.tasacion}} </li>
+                            <li class="list-group-item"> <strong>Comisión de estudio: </strong> {{bank.comEstudio}} </li>
+                            <li class="list-group-item"> <strong>Comisión activación: </strong> {{bank.comActivacion}} </li>
+                            <li class="list-group-item"> <strong>Comisión periodica: </strong> {{bank.comPeriodica}} </li>
+                            <li class="list-group-item"> <strong>Portes: </strong> {{bank.portes}} </li>
+                            <li class="list-group-item"> <strong>Gastos de Administración: </strong> {{bank.gastosAdmin}} </li>
+                            <li class="list-group-item"> <strong>Seguro desgravamen: </strong> {{bank.segDesgravamen}}% </li>
+                            <li class="list-group-item"> <strong>Seguro riesgo: </strong> {{bank.segRiesgo}}% </li>
+                          </ul>
                     </div>
 
                 </div>

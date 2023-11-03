@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Banco } from 'src/app/models/banco';
+import { BancoService } from 'src/app/services/banco.service';
 
 @Component({
   selector: 'app-compare-banks',
@@ -6,7 +8,15 @@ import { Component } from '@angular/core';
   styleUrls: ['./compare-banks.component.scss']
 })
 export class CompareBanksComponent {
-  items = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
+  constructor(private bancoService: BancoService){}
   expandedIndex = 0;
-  
+  paycar : Banco = new Banco()
+  bancos !: Banco[]
+  ngOnInit(){
+    this.bancoService.getBancos().subscribe((bancos: Banco[]) => {
+      this.bancos = bancos.filter(banco => banco.nombre != 'PayCar')
+      this.paycar = bancos.filter(banco => banco.nombre == 'PayCar')[0]
+    })
+  }
+
 }
