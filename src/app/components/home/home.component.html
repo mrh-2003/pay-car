@@ -28,6 +28,27 @@
     </div>
    </div>
    <div class="col-12">
-    
+    <h2>Testimonios</h2>
+    <mat-tab-group>
+      <mat-tab [label]="testimonio.nombre" *ngFor="let testimonio of testimonios; let i = index">
+        <br>
+        <div class="container">
+          {{testimonio.comentario}}
+        </div>
+      </mat-tab>
+      <mat-tab label="Agregar comentario">
+        <div class="row text-center">
+          <div class="col-6">
+            <mat-form-field class="container">
+              <mat-label>Comentario</mat-label>
+              <textarea matInput [(ngModel)]="comentario" placeholder="Yo opino ..."></textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-6">
+            <button (click)="addTestimonio()" style="width: 100%;" mat-raised-button color="primary">Primary</button>
+          </div>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
    </div>
 </div>

@@ -16,6 +16,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
 import {MatDialogModule} from '@angular/material/dialog';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
+import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [],
   imports: [
@@ -36,7 +37,8 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
-    CdkAccordionModule
+    CdkAccordionModule,
+    MatTabsModule
   ],
   exports:[
     FormsModule,
@@ -55,7 +57,8 @@ import {CdkAccordionModule} from '@angular/cdk/accordion';
     MatPaginatorModule,
     MatSortModule,
     MatDialogModule,
-    CdkAccordionModule
+    CdkAccordionModule,
+    MatTabsModule
   ]
 })
 export class SharedModule { } 

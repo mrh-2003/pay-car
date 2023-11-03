@@ -26,7 +26,6 @@ import { PriceDialogComponent } from './components/price-dialog/price-dialog.com
 import { ListCarComponent } from './components/list-car/list-car.component';
 import { AddEditCarComponent } from './components/add-edit-car/add-edit-car.component';
 import { CompareBanksComponent } from './components/compare-banks/compare-banks.component';
-import { CarruselComponent } from './components/carrusel/carrusel.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +45,7 @@ import { CarruselComponent } from './components/carrusel/carrusel.component';
     PriceDialogComponent,
     ListCarComponent,
     AddEditCarComponent,
-    CompareBanksComponent,
-    CarruselComponent
+    CompareBanksComponent
   ],
   imports: [
     BrowserModule,
