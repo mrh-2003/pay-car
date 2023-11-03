@@ -15,9 +15,9 @@ import { AddEditCarComponent } from './components/add-edit-car/add-edit-car.comp
 import { CompareBanksComponent } from './components/compare-banks/compare-banks.component';
 
 const routes: Routes = [
-  {path: 'login', component: LoginComponent, canActivate:[LoginGuard] },
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: '', component: DashboardComponent, canActivate: [AuthGuard],
+  {path: '', component: LoginComponent},
+  {path: 'a', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'a', component: DashboardComponent, canActivate: [AuthGuard],
     children: [
       {path: 'home', component: HomeComponent},
       {path: 'run', component: SmartCreditComponent},
@@ -34,7 +34,7 @@ const routes: Routes = [
       {path: 'show-run/:id', component: ListRunComponent},
     ],
   },
-  {path: '**', redirectTo: 'login', pathMatch: 'full'},
+  {path: '**', redirectTo: '', pathMatch: 'full'},
 ];
 
 @NgModule({
