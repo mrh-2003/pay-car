@@ -10,11 +10,15 @@ import { TestimonioService } from 'src/app/services/testimonio.service';
 })
 export class HomeComponent {
   nombre = '';
+  email = '';
   comentario = '';
   testimonios: Testimonio[] = [];
   constructor(private auth: AngularFireAuth, private testimonioService: TestimonioService) { }
   ngOnInit() {
-    this.auth.currentUser.then((response) => this.nombre = response?.displayName as string);
+    this.auth.currentUser.then((response) => {
+      this.nombre = response?.displayName as string
+      this.email = response?.email as string
+    });
     this.testimonioService.getTestimonios().subscribe((data: Testimonio[]) => this.testimonios = data);
   }
 
@@ -24,7 +28,7 @@ export class HomeComponent {
       nombre: this.nombre,
       comentario: this.comentario,
       fecha: new Date().toISOString(),
-      foto: ''
+      email: this.email
     }
     this.testimonioService.addTestimonio(persona).then((data: any) => {
       this.comentario = '';

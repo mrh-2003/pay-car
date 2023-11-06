@@ -19,7 +19,7 @@
         <mat-icon>history</mat-icon>
         Historial de corridas
       </button>
-      <button mat-button routerLink="/bank">
+      <button *ngIf="rol == 'admin'" mat-button routerLink="/bank">
         <mat-icon>savings</mat-icon>
         Financieras
       </button>

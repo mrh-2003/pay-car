@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,8 @@ export class LoginComponent {
   constructor(private elementRef: ElementRef,
     private loginService: LoginService,
     private fb: FormBuilder,
-    private router: Router) { }
+    private router: Router,
+    private usuarioService: UsuarioService) { }
   front_box: any;
   form_login: any;
   form_register: any;
@@ -25,7 +27,8 @@ export class LoginComponent {
     this.form = this.fb.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]]
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        nombres: [''],
       }
     )
   }
@@ -33,8 +36,9 @@ export class LoginComponent {
   register() {
     this.loginService.register(this.form.value)
       .then(
-        () => {
-          this.changeLogin()
+        (response) => {
+          this.usuarioService.addUsuario({ id: response.user?.uid, nombres: this.form.value.nombres,email: this.form.value.email, rol: 'cliente' });
+          this.router.navigate(["home"])
         }
       )
       .catch(error => console.log(error));
@@ -52,7 +56,10 @@ export class LoginComponent {
   loginGoogle() {
     this.loginService.loginGoogle()
       .then(
-        response => this.router.navigate(["home"])
+        (response) => {
+          this.usuarioService.addUsuario({ id: response.user?.uid, nombres: response.user?.displayName as string, email : response.user?.email as string, rol: 'cliente' });
+          this.router.navigate(["home"])
+        }
       )
       .catch(error => console.log(error));
   }
@@ -60,7 +67,10 @@ export class LoginComponent {
   loginFacebook() {
     this.loginService.loginGoogle()
       .then(
-        response => this.router.navigate(["home"])
+        (response) => {
+          this.usuarioService.addUsuario({ id: response.user?.uid, nombres: response.user?.displayName as string, email : response.user?.email as string, rol: 'cliente' });
+          this.router.navigate(["home"])
+        }
       )
       .catch(error => console.log(error));
   }

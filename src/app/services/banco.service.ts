@@ -10,7 +10,7 @@ export class BancoService {
 
   constructor(private db: AngularFirestore) { }
 
-   addBanco(banco: Banco){
+  addBanco(banco: Banco){
     banco.id = this.db.createId()
     return this.db.collection('bancos').doc(banco.id).set(banco);
   } 

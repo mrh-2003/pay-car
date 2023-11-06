@@ -3,6 +3,7 @@ import { Vehiculo } from 'src/app/models/vehiculo';
 import { VehiculoService } from 'src/app/services/vehiculo.service';
 import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-list-car',
@@ -12,11 +13,14 @@ import { MatDialog } from '@angular/material/dialog';
 export class ListCarComponent {
   vehiculos : Vehiculo[] = [];
   car: Vehiculo = new Vehiculo()
+  rol = '';
   constructor(
     private vehiculoService: VehiculoService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private usuarioService: UsuarioService
   ){}
   ngOnInit(){
+    this.usuarioService.getRol().then(rol=> this.rol = rol);
     this.vehiculoService.getVehiculos().subscribe((vehiculos) => {
       this.vehiculos = vehiculos;
       if(vehiculos.length > 0){
