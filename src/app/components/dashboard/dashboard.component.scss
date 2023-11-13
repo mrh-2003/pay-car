@@ -1,11 +1,16 @@
 .sidenav-container {
-  background-color: #cfd2de;
+  background-color: #ffffff;
   height: 100%;
 }
 
 .sidenav {
-  background-color: #ebebeb;
+  background-color: #191E29;
   width: 230px;
+}
+
+.mat-toolbar{
+  color: #ffffff;
+  background: #191E29;
 }
 
 .sidenav .mat-toolbar {
@@ -19,14 +24,14 @@
   z-index: 1;
 }
 .logo{
-  margin: auto;
-  width: 90%;
+  width: 100%;
 }
 .logo-container{
   margin: 15% auto;
 }
 
 mat-nav-list button{
+  color: #ffffff !important;
   width: 100%;
   justify-content: left;
   padding: 30px 0px 30px 20px;

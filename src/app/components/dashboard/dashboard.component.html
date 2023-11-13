@@ -4,7 +4,7 @@
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar class="logo-container">
-      <img class="logo" src="../../../assets/img/logo.png" alt="" routerLink="/home">
+      <img class="logo" src="../../../assets/img/logo1.png" alt="" routerLink="/home">
     </mat-toolbar>
     <mat-nav-list>
       <button mat-button routerLink="/home">
@@ -47,7 +47,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <span>PayCar - Crédito vehicular</span>
+      <span >PayCar - Crédito vehicular</span>
     </mat-toolbar>
     <!-- Add Content Here -->
     <router-outlet></router-outlet>

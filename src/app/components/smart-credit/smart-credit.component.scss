@@ -2,15 +2,25 @@
     margin: 25px ;
 }
 
+h1{
+    margin-top: 10px;
+    color: #01C38D;
+    font-weight: bold;
+}
+
 .card{
     width: 100%;
+    background: #696E79;
 }
 
 .izquierda{
     text-align: left;
 }
 
-.cuadro{
-    border: black solid;
+.button{
+    background-color: #01C38D;
+    border: 2px solid #01C38D;
 }
+
+
 

@@ -1,8 +1,29 @@
 .card{
     max-width: 100% !important;
     width: 100%;
+    border: 2px solid #696E79;
 }
 
 .row{
     margin: 25px ;
+}
+
+.card-header{
+    display: flex;
+    justify-content: space-between;
+    background-color: #696E79;
+    color: #fff;
+}
+
+.button{
+    color: #01C38D;
+    border: 2px solid #01C38D;
+}
+
+.comentarios{
+    color: #01C38D;
+}
+
+.container{
+    color: #4758b8;
 }

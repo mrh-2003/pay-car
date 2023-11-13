@@ -33,7 +33,7 @@ export class ListRunComponent {
           this.corrida.precio = this.corrida.precio - this.corrida.montoReference;
         }
         if (this.corrida.status == 'normal') {
-          this.actions = "Comprar"
+          this.actions = "Comprar vehiculo"
         } else {
           this.actions = "Finalizar corrida";
         }
@@ -118,14 +118,14 @@ export class ListRunComponent {
     return { valor: `(${Math.abs(numero).toFixed(2)})`, css: 'rojo' };
   }
   getSegDesg() {
-    return (this.corrida.banco.segDesgravamen / 100) / (360 / this.getDias(this.corrida.frecPago))
+    return this.corrida.banco.segDesgravamen / 100
   }
 
   abs(numero: number) {
     return Math.abs(numero)
   }
   getSeguroRiesgo() {
-    return this.corrida.precio * ((this.corrida.banco.segRiesgo / 100) / (360 / this.getDias(this.corrida.frecPago)))
+    return this.corrida.precio * (this.corrida.banco.segRiesgo / 100)
   }
 
   getVan() {

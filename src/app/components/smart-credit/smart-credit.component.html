@@ -1,8 +1,12 @@
 <div class="container text-center">
-    <h2>Realizar corrida</h2>
+    <h1>Realizar simulación</h1>
     <div class="row">
-      <div class="col-xl-5 col-xs-12 cuadro">
-        <form class="row" [formGroup]="form">
+      <div class="col-xl-6 col-xs-12">
+        <mat-card class="card">
+          <mat-card-header class="justify-content-center">
+            <mat-card-title>Ingresar datos de la simulación</mat-card-title>
+          </mat-card-header>
+          <form class="row" [formGroup]="form">
             <mat-form-field appearance="fill">
                 <mat-label>Seleccione la moneda</mat-label>
                 <mat-select disableRipple formControlName="moneda">
@@ -93,22 +97,17 @@
                 </mat-label>
                 <input type="number" matInput formControlName="COK" >
             </mat-form-field>
-            <mat-form-field appearance="fill">
-              <mat-label>Seleccione la entidad financiera</mat-label>
-              <mat-select disableRipple formControlName="banco" >
-                <mat-option *ngFor="let bank of bancos" [value]="bank"> {{bank.nombre}}
-                </mat-option>
-              </mat-select>
-          </mat-form-field>
-            <button  mat-raised-button color="primary" type="button" (click)="validateRun()" [disabled]="form.invalid">Validar Corrida</button>
+            <button class="button" mat-raised-button type="button" (click)="validateRun()" [disabled]="form.invalid">Validar simulación</button>
         </form>
+        </mat-card>
+        
       </div>
       <span class="col-1"></span>
-      <div class="col-xl-6 col-xs-12">
+      <div class="col-xl-5 col-xs-12">
         <mat-card class="card">
           <mat-card-header class="justify-content-center">
-            <mat-card-title>Resumen de la corrida</mat-card-title>
-            <mat-card-subtitle>Datos de la corrida</mat-card-subtitle>
+            <mat-card-title>Resumen de la simulación</mat-card-title>
+            <mat-card-subtitle>Datos de la simulación</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="izquierda">
               <ul class="list-group">
@@ -129,7 +128,7 @@
               </ul>
           </mat-card-content>
           <mat-card-header class="justify-content-center">
-            <mat-card-subtitle>Datos de la entidad financiera</mat-card-subtitle>
+            <mat-card-subtitle>Datos de PayCar</mat-card-subtitle>
           </mat-card-header>
           <mat-card-content class="izquierda">
               <ul class="list-group">
@@ -147,7 +146,7 @@
               </ul>
           </mat-card-content>
           <mat-card-actions class="justify-content-center">
-            <button mat-raised-button color="warn" (click)="addCorrida()" [disabled]="!run">Generar corrida</button>
+            <button class="button" mat-raised-button (click)="addCorrida()" [disabled]="!run">Generar simulación</button>
           </mat-card-actions>
         </mat-card>
       </div>

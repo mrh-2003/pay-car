@@ -25,5 +25,9 @@ export class BancoService {
   }
   getBanco(id: string) : Observable<Banco>{
     return this.db.collection('bancos').doc(id).valueChanges() as Observable<Banco>;
-  } 
+  }
+  getBancoByName(name: string): Observable<Banco[]> {
+    return this.db.collection('bancos', ref => ref.where('nombre', '==', name))
+      .valueChanges() as Observable<Banco[]>;
+  }
 }

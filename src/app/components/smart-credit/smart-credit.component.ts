@@ -15,7 +15,7 @@ import { VehiculoService } from 'src/app/services/vehiculo.service';
 })
 export class SmartCreditComponent {
   form!: FormGroup;
-  bancos: Banco[] = []
+  banco!: Banco
   mostrar :any= {};
   run: boolean = false;
   id!: string;
@@ -38,7 +38,7 @@ export class SmartCreditComponent {
       this.corridaService.getCorrida(this.id).subscribe(
         (data: Corrida)=> this.reference = data )
     }
-    this.bancoService.getBancos().subscribe((datos: Banco[])=> this.bancos = datos);
+    this.bancoService.getBancoByName("PayCar").subscribe((datos: Banco[])=> this.banco = datos[0]);
     this.form = this.fb.group(
       {
         moneda : ['',Validators.required],
@@ -53,8 +53,7 @@ export class SmartCreditComponent {
         plazo: ['',[Validators.required, Validators.min(1)]],
         graciaParcial: ['', Validators.min(0)],
         graciaTotal: ['', Validators.min(0)],
-        COK: ['', [Validators.required, Validators.min(1)]],
-        banco: ['', Validators.required],
+        COK: ['', [Validators.required, Validators.min(1)]]
       }
     )
     if(this.route.snapshot.url.length == 3){
@@ -77,8 +76,7 @@ export class SmartCreditComponent {
               plazo: ['',[Validators.required, Validators.min(1)]],
               graciaParcial: ['', Validators.min(0)],
               graciaTotal: ['', Validators.min(0)],
-              COK: ['', [Validators.required, Validators.min(1)]],
-              banco: ['', Validators.required],
+              COK: ['', [Validators.required, Validators.min(1)]]
             })
         }
       )
@@ -116,6 +114,7 @@ export class SmartCreditComponent {
       this.form.value.moneda = this.mostrar.moneda;
     }
     this.mostrar = this.form.value;
+    this.mostrar.banco = this.banco;
   }
 
   async addCorrida(){

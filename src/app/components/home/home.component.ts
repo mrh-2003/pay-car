@@ -13,6 +13,7 @@ export class HomeComponent {
   email = '';
   comentario = '';
   testimonios: Testimonio[] = [];
+  today = new Date();
   constructor(private auth: AngularFireAuth, private testimonioService: TestimonioService) { }
   ngOnInit() {
     this.auth.currentUser.then((response) => {

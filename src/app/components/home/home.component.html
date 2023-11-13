@@ -1,33 +1,51 @@
-
-
 <div class="row">
-   <div class="col-12">
-    <div class="card border-light mb-3" style="max-width: 18rem;">
-        <div class="card-header">
-            <h2 class="titulo">Bienvenido (a) {{nombre}}</h2>
+  <div class="col-12">
+    <div class="card mb-3" style="max-width: 18rem;">
+      <div class="card-header">
+        <h2 class="titulo">Bienvenido (a) {{nombre}}</h2>
+        <h5 class="card-title"> {{today|date}}</h5>
+      </div>
+      <div class="card-body">
+        <div class="card-text">
+          <p>Si desea realizar una simulación, siga los siguientes pasos:</p>
+          <ol>
+            <li>Dirígase al botón “Realizar simulación”</li>
+            <li>Ingrese todos los datos solicitados en las cajas de texto</li>
+            <li>Dar click en “Validar simulación”, lo cual mostrará un resumen completo de la simulación</li>
+            <li>Revisa cuidadosamente los datos de la simulación y, si estás conforme, selecciona “Generar simulación”
+            </li>
+            <li>En la nueva ventana se mostrará el resumen de la simulación y el plan de pagos detallado</li>
+            <li>En la tabla del plan de pagos, podrás ajustar el periodo de gracia en la columna correspondiente, si es
+              necesario</li>
+            <li>Después de modificar el periodo de gracia, asegúrate de seleccionar “Actualizar datos” para guardar los
+              cambios</li>
+            <li>Si decides adquirir el vehículo, selecciona “Comprar vehículo”</li>
+            <li>Una vez que el vehículo ha sido comprado y se han pagado todas las cuotas, haz click en “Finalizar
+              simulación”</li>
+            <li>Se presentarán tres opciones: renunciar al vehículo, renovar el vehículo o comprar el vehículo</li>
+            <li>Si decides renunciar o comprar el vehículo, la simulación se guardará y no se podrá modificar más</li>
+            <li>En caso de renovar, ingresar el valor actual del vehículo para una nueva simulación del plan de pagos
+            </li>
+          </ol>
+          <p>Otras funcionalidades:</p>
+          <ul>
+              <li><strong>Historial de simulaciones:</strong> Muestra una tabla con todas las simulaciones realizadas, clasificadas en cinco tipos representados con diferentes colores: Cliente, Renovado, Cancelado, Simulación y Comprado.
+                  <ul>
+                      <li><em>Cliente:</em> Indica que has comprado el vehículo y, por ende, eres cliente de PayCar.</li>
+                      <li><em>Renovado:</em> Significa que adquiriste el vehículo y decidiste renovar el contrato.</li>
+                      <li><em>Cancelado:</em> Indica que compraste el vehículo pero decidiste no pagar la última cuota, devolviendo el vehículo.</li>
+                      <li><em>Comprado:</em> Significa que decidiste comprar el vehículo y pagaste la última cuota, por lo que no tienes más obligaciones financieras con PayCar.</li>
+                      <li><em>Simulación:</em> Indica que estás realizando una cotización de un vehículo, sin compromiso de compra.</li>
+                  </ul>
+              </li>
+              <li><strong>Comparar financieras:</strong> Esta opción te permite comparar los beneficios que te ofrece PayCar en comparación con otras financieras.</li>
+              <li><strong>Carros:</strong> Aquí puedes explorar vehículos disponibles para compra, obteniendo información detallada sobre cada uno.</li>
+          </ul>          
         </div>
-        <div class="card-body">
-          <h5 class="card-title">FECHA AQUI </h5>
-          <div class="card-text">
-            <p>Si desea realizar una corrida, siga los siguienets pasos:</p>
-            <ol>
-                <li>Dirígase al botón “Realizar corrida”
-                </li>
-                <li>Ingrese el tipo de moneda (soles o dólares)
-                </li>
-                <li>Ingrese el valor 
-                </li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-            </ol>
-          </div>
-        </div>
+      </div>
     </div>
-   </div>
-   <div class="col-12">
+  </div>
+  <div class="col-12 comentarios">
     <h2>Testimonios</h2>
     <mat-tab-group>
       <mat-tab [label]="testimonio.nombre" *ngFor="let testimonio of testimonios; let i = index">
@@ -45,10 +63,10 @@
             </mat-form-field>
           </div>
           <div class="col-6">
-            <button (click)="addTestimonio()" style="width: 100%;" mat-raised-button color="primary">Primary</button>
+            <button class="button" (click)="addTestimonio()" style="width: 100%;" mat-raised-button>Comentar</button>
           </div>
         </div>
       </mat-tab>
     </mat-tab-group>
-   </div>
+  </div>
 </div>

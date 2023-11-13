@@ -34,7 +34,7 @@ main{
     display: flex;
     justify-content: center;
     backdrop-filter: blur(10px);
-    background-color: #B0C4DE;
+    background-color: #132D46 ;
 }
 
 .back_box div{
@@ -51,11 +51,12 @@ main{
 .back_box div h3 {
     font-weight: 400;
     font-size: 26px;
+    color: #01C38D  ;
 }
 
 .back_box button{
     padding: 10px 40px;
-    border: 2px solid #fff;
+    border: 2px solid #01C38D;
     background: transparent;
     font-size: 14px;
     font-weight: 600;
@@ -67,7 +68,7 @@ main{
 
 .back_box button:hover{
     background: #fff;
-    color: #B0C4DE;
+    color: #132D46;
 }
 
 .front_box{
@@ -94,7 +95,7 @@ main{
     font-size: 30px;
     text-align: center;
     margin-bottom: 20px;
-    color: #B0C4DE;
+    color: #01C38D;
 }
 
 .front_box form input{
@@ -112,7 +113,7 @@ main{
     margin-top: 40px;
     border: none;
     font-size: 14px;
-    background: #B0C4DE;
+    background: #132D46;
     color: white;
     cursor: pointer;
     outline: none;
@@ -162,7 +163,7 @@ main{
     padding: 10px 40px;
     border: none;
     font-size: 14px;
-    background: #B0C4DE;
+    background: #132D46;
     color: white;
     cursor: pointer;
     outline: none;
