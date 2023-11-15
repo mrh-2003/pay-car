@@ -50,13 +50,9 @@ export class ListRunComponent {
       this.corrida.banco.comEstudio +
       this.corrida.banco.comActivacion;
   }
-  /*   calcularCuota() {
-      const cuota = this.periodos[0].saldo - (this.corrida.precio *(this.corrida.final/100))/Math.pow(1+(this.corrida.tasa / 100 + this.getSegDesg()), this.corrida.gracia.length)
-      return  cuota * ((this.corrida.tasa / 100 + this.getSegDesg())/ (1- Math.pow(1+(this.corrida.tasa / 100+ this.getSegDesg()), -this.corrida.gracia.length )))
-    } */
   calcularCuota(periodo: Periodo, i: number) {
-    const cuota = periodo.saldo - (this.corrida.precio * (this.corrida.final / 100)) / Math.pow(1 + (this.corrida.tasa / 100 + this.getSegDesg()), this.corrida.gracia.length + 1 - i)
-    return cuota * ((this.corrida.tasa / 100 + this.getSegDesg()) / (1 - Math.pow(1 + (this.corrida.tasa / 100 + this.getSegDesg()), -(this.corrida.gracia.length + 1 - i))))
+    const cuota = periodo.saldo - (this.corrida.precio * (this.corrida.final / 100)) / Math.pow(1 + (this.corrida.tasa / 100 + this.getSegDesg()), this.corrida.gracia.length - i)
+    return cuota * ((this.corrida.tasa / 100 + this.getSegDesg()) / (1 - Math.pow(1 + (this.corrida.tasa / 100 + this.getSegDesg()), -(this.corrida.gracia.length - i))))
   }
   seleccionCambiada() {
     this.periodos = []
@@ -84,12 +80,11 @@ export class ListRunComponent {
       saldo: this.calcularSaldoInicial(),
       flujo: this.calcularSaldoInicial(),
     })
-    for (let i = 0; i < this.corrida.gracia.length; i++) {
+    for (let i = 0; i <= this.corrida.gracia.length; i++) {
       const periodo: Periodo = new Periodo();
       periodo.interes = this.periodos[i].saldo * (this.corrida.tasa / 100);
       periodo.segDes = this.getSegDesg() * this.periodos[i].saldo;
       periodo.cuota = this.calcularCuota(this.periodos[i], i);
-      //Cambiar aqui, tomar en cuenta que el seguro de desgravamen siempre se cobra 
       if (this.corrida.gracia[i] == "Total") {
         periodo.cuota = 0;
       }
@@ -101,15 +96,12 @@ export class ListRunComponent {
       periodo.flujo = periodo.cuota + this.getSeguroRiesgo() + this.corrida.banco.portes + this.corrida.banco.gastosAdmin + this.corrida.banco.comPeriodica
       this.periodos.push(periodo);
     }
-    const periodo: Periodo = new Periodo();
-    periodo.cuota = this.corrida.precio * (this.corrida.final / 100) // sumarle intereses y sumarle seguro de desgravamen
-    periodo.interes = this.periodos[this.corrida.gracia.length].saldo * (this.corrida.tasa / 100);
-    periodo.segDes = this.getSegDesg() * this.periodos[this.corrida.gracia.length].saldo;
-    periodo.amort = periodo.cuota;
+    const periodo: Periodo = this.periodos[this.corrida.gracia.length + 1];
+    periodo.amort = this.corrida.precio * (this.corrida.final / 100)
+    periodo.cuota = periodo.amort + periodo.segDes + periodo.interes;
     periodo.saldo = this.periodos[this.corrida.gracia.length].saldo - periodo.amort;
-    periodo.flujo = periodo.cuota
-    this.periodos.push(periodo);
-
+    periodo.flujo = periodo.cuota + this.getSeguroRiesgo() + this.corrida.banco.portes + this.corrida.banco.gastosAdmin + this.corrida.banco.comPeriodica
+    this.periodos[this.corrida.gracia.length + 1] = periodo;
   }
   formatearNumero(numero: number): { valor: string, css: string } {
     if (numero >= 0) {
