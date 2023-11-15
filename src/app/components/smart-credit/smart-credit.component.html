@@ -97,7 +97,9 @@
                 </mat-label>
                 <input type="number" matInput formControlName="COK" >
             </mat-form-field>
-            <button class="button" mat-raised-button type="button" (click)="validateRun()" [disabled]="form.invalid">Validar simulación</button>
+            <button 
+            [ngClass]="{ 'disabled-button': form.invalid, 'enabled-button': !form.invalid }"
+            mat-raised-button type="button" (click)="validateRun()" [disabled]="form.invalid">Validar simulación</button>
         </form>
         </mat-card>
         
@@ -146,7 +148,9 @@
               </ul>
           </mat-card-content>
           <mat-card-actions class="justify-content-center">
-            <button class="button" mat-raised-button (click)="addCorrida()" [disabled]="!run">Generar simulación</button>
+            <button 
+            [ngClass]="{ 'disabled-button': !run, 'enabled-button': run }"
+            mat-raised-button (click)="addCorrida()" [disabled]="!run">Generar simulación</button>
           </mat-card-actions>
         </mat-card>
       </div>

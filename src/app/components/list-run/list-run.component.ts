@@ -35,7 +35,7 @@ export class ListRunComponent {
         if (this.corrida.status == 'normal') {
           this.actions = "Comprar vehiculo"
         } else {
-          this.actions = "Finalizar corrida";
+          this.actions = "Finalizar simulación";
         }
         this.generateData();
       }
@@ -103,7 +103,7 @@ export class ListRunComponent {
     }
     const periodo: Periodo = new Periodo();
     periodo.cuota = this.corrida.precio * (this.corrida.final / 100) // sumarle intereses y sumarle seguro de desgravamen
-    periodo.interes = 0;
+    periodo.interes = this.periodos[this.corrida.gracia.length].saldo * (this.corrida.tasa / 100);
     periodo.segDes = this.getSegDesg() * this.periodos[this.corrida.gracia.length].saldo;
     periodo.amort = periodo.cuota;
     periodo.saldo = this.periodos[this.corrida.gracia.length].saldo - periodo.amort;
@@ -175,7 +175,7 @@ export class ListRunComponent {
 
   buyCorrida() {
     if (this.corrida.status == "normal") {
-      this.actions = "Finalizar corrida";
+      this.actions = "Finalizar simulación";
       this.corrida.status = "cliente";
       this.corrida.precio = this.corrida.precio + this.corrida.montoReference;
       this.corridaService.updateCorrida(this.corrida); //el precio volverlo al valor original

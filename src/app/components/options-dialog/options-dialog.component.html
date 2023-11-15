@@ -1,12 +1,24 @@
 <div class="text-center">
-    <h1 mat-dialog-title>¿Esta seguro que quieres eliminar el elemento?</h1>
+    <h1 mat-dialog-title>¿Qué opción de compra prefieres?</h1>
     <div mat-dialog-content>
-        Esperamos volver a verlo y ofrecerle el mejor servicio financiero. 
+        Escoge la opción que mejor se adapte a tus necesidades financieras:
+        <ul>
+            <li>
+                <strong>Renovar:</strong> Renueva tu auto según la cotización actual. Se creará un nuevo plan de pagos
+                basado en el valor actual y el nuevo precio del vehículo.
+            </li>
+            <li>
+                <strong>Pagar:</strong> Abona la última cuota del plan y conserva tu auto.
+            </li>
+            <li>
+                <strong>Renunciar:</strong> No pagues la última cuota y devuelve el auto a la financiera.
+            </li>
+        </ul>
     </div>
-    <div mat-dialog-actions  class="justify-content-center">
-        <button mat-raised-button [mat-dialog-close]="0" color="warn">Cancelar</button>
-        <button mat-raised-button [mat-dialog-close]="1" color="primary">Renovar</button>
-        <button mat-raised-button [mat-dialog-close]="2" color="primary">Pagar</button>
-        <button mat-raised-button [mat-dialog-close]="3" color="primary">Renunciar</button>
+    <div mat-dialog-actions class="justify-content-center">
+        <button mat-raised-button [mat-dialog-close]="0" class="azul">Cancelar</button>
+        <button mat-raised-button [mat-dialog-close]="1" class="renovar">Renovar</button>
+        <button mat-raised-button [mat-dialog-close]="2" class="comprar">Pagar</button>
+        <button mat-raised-button [mat-dialog-close]="3" class="cancelar">Renunciar</button>
     </div>
 </div>

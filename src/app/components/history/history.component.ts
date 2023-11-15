@@ -12,7 +12,7 @@ import { CorridaService } from 'src/app/services/corrida.service';
   styleUrls: ['./history.component.scss']
 })
 export class HistoryComponent {
-  displayedColumns: string[] = ['fecha', 'moneda', 'precio', 'tasa', 'frecPago', 'plazo', 'banco', 'actions'];
+  displayedColumns: string[] = ['fecha', 'moneda', 'precio', 'tasa', 'frecPago', 'plazo', 'COK', 'actions'];
   dataSource = new MatTableDataSource<Corrida>();
   idUser!: string;
   @ViewChild(MatPaginator) paginator!: MatPaginator;

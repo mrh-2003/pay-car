@@ -31,12 +31,12 @@
                     <img [src]="vehiculo.foto" class="d-block w-100">
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+            <button class="carousel-control-prev verde" type="button" data-bs-target="#carouselExampleAutoplaying"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+            <button class="carousel-control-next verde" type="button" data-bs-target="#carouselExampleAutoplaying"
                 data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
@@ -50,8 +50,9 @@
                 <mat-card-title>{{car.modelo}} {{car.marca}}</mat-card-title>
                 <mat-card-subtitle>Vehiculo de color {{car.color}} del año {{car.anio}}.</mat-card-subtitle>
             </mat-card-header>
+            <br>
             <mat-card-content>
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-flush marco">
                     <li class="list-group-item">Placa: {{car.placa}}</li>
                     <li class="list-group-item">Precio: {{car.precio}} {{car.moneda}}</li>
                     <li class="list-group-item">Descuento: {{car.descuento}}%</li>
@@ -59,13 +60,13 @@
                 </ul>
             </mat-card-content>
             <mat-card-actions class="justify-content-center">
-                <button *ngIf="rol == 'admin'" mat-fab class="espacio" color="primary" routerLink="/car/edit/{{car.id}}">
+                <button *ngIf="rol == 'admin'" mat-fab class="espacio azul"routerLink="/car/edit/{{car.id}}">
                     <mat-icon>edit</mat-icon>
                 </button>
                 <button *ngIf="rol == 'admin'" mat-fab class="espacio" (click)="deleteVehiculo()">
                     <mat-icon>delete</mat-icon>
                 </button>
-                <button mat-fab class="espacio" color="warn" routerLink="/run/car/{{car.id}}">
+                <button mat-fab class="verde espacio" color="warn" routerLink="/run/car/{{car.id}}">
                     <mat-icon>
                         shopping_cart
                     </mat-icon>

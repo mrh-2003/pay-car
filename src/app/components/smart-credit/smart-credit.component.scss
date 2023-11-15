@@ -9,6 +9,8 @@ h1{
 }
 
 .card{
+    color: #191e29;
+    border: #01C38D 2px solid;
     width: 100%;
     background: #696E79;
 }
@@ -16,10 +18,18 @@ h1{
 .izquierda{
     text-align: left;
 }
+.disabled-button {
+    color: #01C38D;
+    border: 2px solid #01C38D;
+}
 
-.button{
+.enabled-button {
+    color: #fff;
     background-color: #01C38D;
     border: 2px solid #01C38D;
+}
+mat-card-subtitle{
+    color: #fff;
 }
 
 

@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-6">
-        <div class="card" style="width: 18rem;">
+        <div class="card paycar" style="width: 18rem;">
             <div class="card-body">
                 <h2 class="card-title">{{paycar.nombre}}</h2>
                 <p class="card-text">Nuestra financiera tiene grandes ventajas respecto a nuestros competidores.</p>
@@ -25,10 +25,10 @@
             <cdk-accordion-item *ngFor="let bank of bancos; let index = index;" #accordionItem="cdkAccordionItem"
                 class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
                 [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
-                <div class="example-accordion-item-header" (click)="accordionItem.toggle()">
+                <div class="example-accordion-item-header financieras" (click)="accordionItem.toggle()">
                     {{ bank.nombre }}
                     <span class="example-accordion-item-description">
-                        Click to {{ accordionItem.expanded ? 'close' : 'open' }}
+                        Click para {{ accordionItem.expanded ? 'cerrar' : 'abrir' }}
                     </span>
                 </div>
                 <div class="example-accordion-item-body" role="region"
@@ -36,8 +36,7 @@
                     [attr.aria-labelledby]="'accordion-header-' + index">
 
                     <div class="card" style="width: 18rem;">
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item"> <strong>Nombre: </strong> {{bank.nombre}} </li>
+                        <ul class="list-group list-group-flush ">
                             <li class="list-group-item"> <strong>Costes Notariales: </strong> {{bank.cosNotariales}} </li>
                             <li class="list-group-item"> <strong>Costes Registrales: </strong> {{bank.cosRegistrales}} </li>
                             <li class="list-group-item"> <strong>Tasación: </strong> {{bank.tasacion}} </li>

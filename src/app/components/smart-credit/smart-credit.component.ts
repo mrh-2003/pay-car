@@ -51,8 +51,8 @@ export class SmartCreditComponent {
         tasa: ['',[Validators.required, Validators.min(0)]],
         frecPago: ['', Validators.required],
         plazo: ['',[Validators.required, Validators.min(1)]],
-        graciaParcial: ['', Validators.min(0)],
-        graciaTotal: ['', Validators.min(0)],
+        graciaParcial: ['', [Validators.required, Validators.min(0)]],
+        graciaTotal: ['', [Validators.required, Validators.min(0)]],
         COK: ['', [Validators.required, Validators.min(1)]]
       }
     )
@@ -74,8 +74,8 @@ export class SmartCreditComponent {
               tasa: ['',[Validators.required, Validators.min(0)]],
               frecPago: ['', Validators.required],
               plazo: ['',[Validators.required, Validators.min(1)]],
-              graciaParcial: ['', Validators.min(0)],
-              graciaTotal: ['', Validators.min(0)],
+              graciaParcial: ['',[Validators.required, Validators.min(0)]],
+              graciaTotal: ['',[Validators.required, Validators.min(0)]],
               COK: ['', [Validators.required, Validators.min(1)]]
             })
         }

@@ -2,12 +2,12 @@
     <div class="col-12">
         <mat-card class="card">
             <mat-card-header class="justify-content-center">
-                <mat-card-title>Resumen de la corrida</mat-card-title>
+                <mat-card-title>Resumen de la simulación</mat-card-title>
             </mat-card-header>
             <div class="row">
                 <div class="col-6">
                     <mat-card-header class="justify-content-center">
-                        <mat-card-subtitle>Datos de la corrida</mat-card-subtitle>
+                        <mat-card-subtitle>Datos de la simulación</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content class="izquierda">
                         <ul class="list-group">
@@ -72,13 +72,13 @@
                             </ul>
                         </mat-card-content>
                         <mat-card-header *ngIf="corrida.idReference" class="justify-content-center">
-                            <button mat-raised-button (click)="actualizar()" color="primary" >Referencia</button>
+                            <button mat-raised-button (click)="actualizar()" class="button-azul" >Referencia</button>
                         </mat-card-header>
                     </div>
                 </div>
             </div>
             <mat-card-actions *ngIf="corrida.status == 'normal' || corrida.status == 'cliente'"  class="justify-content-center">
-                <button mat-raised-button color="warn" (click)="buyCorrida()" >{{actions}}</button>
+                <button mat-raised-button class="button" (click)="buyCorrida()" >{{actions}}</button>
             </mat-card-actions>
         </mat-card>
     </div>
@@ -117,17 +117,17 @@
                     <td [ngClass]="formatearNumero(-p.interes).css"> {{formatearNumero(-p.interes).valor}}</td>
                     <td [ngClass]="formatearNumero(-p.segDes).css">{{formatearNumero(-p.segDes).valor}}</td>
                     <td [ngClass]="formatearNumero(-p.cuota).css">{{formatearNumero(-p.cuota).valor}}</td>
-                    <td [ngClass]="formatearNumero(i!=0 && i != periodos.length - 1 ? -getSeguroRiesgo() : 0).css">
-                        {{formatearNumero(i!=0 && i != periodos.length - 1 ? -getSeguroRiesgo() : 0).valor}}</td>
+                    <td [ngClass]="formatearNumero(i!=0 ? -getSeguroRiesgo() : 0).css">
+                        {{formatearNumero(i!=0 ? -getSeguroRiesgo() : 0).valor}}</td>
                     <td
-                        [ngClass]="formatearNumero(i!=0 && i != periodos.length - 1? -corrida.banco.comPeriodica : 0).css">
-                        {{formatearNumero(i!=0 && i != periodos.length - 1? -corrida.banco.comPeriodica : 0).valor}}
+                        [ngClass]="formatearNumero(i!=0? -corrida.banco.comPeriodica : 0).css">
+                        {{formatearNumero(i!=0? -corrida.banco.comPeriodica : 0).valor}}
                     </td>
-                    <td [ngClass]="formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.portes : 0).css">
-                        {{formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.portes : 0).valor}}</td>
+                    <td [ngClass]="formatearNumero(i!=0? -corrida.banco.portes : 0).css">
+                        {{formatearNumero(i!=0? -corrida.banco.portes : 0).valor}}</td>
                     <td
-                        [ngClass]="formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.gastosAdmin : 0).css">
-                        {{formatearNumero(i!=0&& i != periodos.length - 1? -corrida.banco.gastosAdmin : 0).valor}}</td>
+                        [ngClass]="formatearNumero(i!=0? -corrida.banco.gastosAdmin : 0).css">
+                        {{formatearNumero(i!=0? -corrida.banco.gastosAdmin : 0).valor}}</td>
                     <td [ngClass]="formatearNumero(i == 0? p.flujo : -p.flujo).css">{{formatearNumero(i == 0? p.flujo :
                         -p.flujo).valor}}</td>
                 </tr>
@@ -135,8 +135,10 @@
         </table>
     </div>
     <div class="actions text-center">
-        <button mat-raised-button *ngIf="corrida.status == 'normal' || corrida.status == 'cliente'" color="primary" (click)="updateData()" [disabled]="!cambio">Actualizar datos</button>
-        <button mat-raised-button *ngIf="corrida.status == 'normal' && !corrida.idReference" color="warn" (click)="deleteData()">Eliminar corrida</button>
+        <button
+        [ngClass]="{ 'disabled-button': !cambio, 'enabled-button': cambio }"
+        mat-raised-button *ngIf="corrida.status == 'normal' || corrida.status == 'cliente'" (click)="updateData()" [disabled]="!cambio">Actualizar datos</button>
+        <button mat-raised-button *ngIf="corrida.status == 'normal' && !corrida.idReference" color="accent" (click)="deleteData()">Eliminar simulación</button>
     </div>
 
 </div>

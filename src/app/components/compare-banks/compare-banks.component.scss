@@ -24,7 +24,7 @@
 
 .example-accordion-item-description {
   font-size: 0.85em;
-  color: #999;
+  color: #fff;
 }
 
 .example-accordion-item-header,
@@ -34,7 +34,6 @@
 
 .example-accordion-item-header:hover {
   cursor: pointer;
-  background-color: #eee;
 }
 
 .example-accordion-item:first-child {
@@ -53,4 +52,13 @@ cdk-accordion-item{
 
 .card{
     width: 100% !important;
+}
+
+.paycar{
+  background-color: #01c38d;
+}
+
+.financieras {
+  background-color: #696E79;
+  color: #fff;
 }

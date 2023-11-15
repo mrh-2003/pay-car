@@ -46,7 +46,7 @@
     </div>
   </div>
   <div class="col-12 comentarios">
-    <h2>Testimonios</h2>
+    <h2><strong>Testimonios</strong></h2>
     <mat-tab-group>
       <mat-tab [label]="testimonio.nombre" *ngFor="let testimonio of testimonios; let i = index">
         <br>
@@ -58,12 +58,12 @@
         <div class="row text-center">
           <div class="col-6">
             <mat-form-field class="container">
-              <mat-label>Comentario</mat-label>
-              <textarea matInput [(ngModel)]="comentario" placeholder="Yo opino ..."></textarea>
+              <mat-label>Reseña</mat-label>
+              <textarea matInput [(ngModel)]="comentario" placeholder="Ingresa tu reseña :)"></textarea>
             </mat-form-field>
           </div>
           <div class="col-6">
-            <button class="button" (click)="addTestimonio()" style="width: 100%;" mat-raised-button>Comentar</button>
+            <button class="button" [disabled]="comentario == ''" (click)="addTestimonio()" style="width: 100%;" mat-raised-button>Comentar</button>
           </div>
         </div>
       </mat-tab>

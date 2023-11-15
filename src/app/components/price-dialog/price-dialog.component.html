@@ -1,12 +1,17 @@
-<h1 mat-dialog-title>Precio actual del vehiculo</h1>
-<div mat-dialog-content>
-  <p>Incerte el precio actual del vehiculo</p>
-  <mat-form-field>
-    <mat-label>Precio actual</mat-label>
-    <input matInput [(ngModel)]="precio">
-  </mat-form-field>
-</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Cancelar</button>
-  <button mat-button [mat-dialog-close]="precio" cdkFocusInitial>Aceptar</button>
+<div class="text-center">
+  <h1 mat-dialog-title>Precio actual del vehículo</h1>
+  <div mat-dialog-content>
+    <p>Ingresa el precio actual del vehículo:</p>
+    <mat-form-field>
+      <mat-label>Precio actual</mat-label>
+      <input matInput [(ngModel)]="precio">
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="text-center centrar">
+    <button mat-button mat-dialog-close class="verde">Cancelar</button>
+    <button 
+    mat-button [disabled]="!precio" [mat-dialog-close]="precio"
+    [ngClass]="{ 'disabled-button': !precio, 'enabled-button': precio }"
+    cdkFocusInitial>Aceptar</button>
+  </div>
 </div>

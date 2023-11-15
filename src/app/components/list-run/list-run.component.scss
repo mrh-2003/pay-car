@@ -45,3 +45,42 @@ thead {
 .table-container{
   margin-top: 30px;
 }
+
+mat-card-title{
+  color: #01C38D;
+  font-weight: bold;
+}
+
+.card{
+  border: #01C38D 2px solid;
+  background: #696E79;
+}
+mat-card-subtitle{
+  color: #fff;
+}
+
+.button {
+  color: #fff;
+  background-color: #01C38D;
+}
+
+.button-azul{
+  background-color: #132d46;
+  border: #01C38D 2px solid;
+  color: #fff;
+}
+
+.disabled-button {
+  color: #01C38D;
+  border: 2px solid #01C38D;
+}
+
+.enabled-button {
+  color: #fff;
+  background-color: #01C38D;
+}
+
+th{
+  background-color: #01C38D;
+  color: #fff;
+}
