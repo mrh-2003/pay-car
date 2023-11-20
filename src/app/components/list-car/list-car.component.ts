@@ -13,14 +13,11 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class ListCarComponent {
   vehiculos : Vehiculo[] = [];
   car: Vehiculo = new Vehiculo()
-  rol = '';
   constructor(
     private vehiculoService: VehiculoService,
-    public dialog: MatDialog,
-    private usuarioService: UsuarioService
+    public dialog: MatDialog
   ){}
   ngOnInit(){
-    this.usuarioService.getRol().then(rol=> this.rol = rol);
     this.vehiculoService.getVehiculos().subscribe((vehiculos) => {
       this.vehiculos = vehiculos;
       if(vehiculos.length > 0){

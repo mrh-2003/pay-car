@@ -8,7 +8,7 @@
     </mat-form-field>
   </div>
   <div mat-dialog-actions class="text-center centrar">
-    <button mat-button mat-dialog-close class="verde">Cancelar</button>
+    <button mat-raised-button mat-dialog-close color="warn">Cancelar</button>
     <button 
     mat-button [disabled]="!precio" [mat-dialog-close]="precio"
     [ngClass]="{ 'disabled-button': !precio, 'enabled-button': precio }"

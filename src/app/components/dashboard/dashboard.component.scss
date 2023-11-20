@@ -36,3 +36,8 @@ mat-nav-list button{
   justify-content: left;
   padding: 30px 0px 30px 20px;
 }
+
+mat-nav-list button.active {
+  background-color: #696E79; /* Cambia este color al que desees */
+  color: #ffffff; /* Cambia este color al que desees */
+}

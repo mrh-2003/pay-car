@@ -1,28 +1,8 @@
-<!-- <div class="row">
+<div class="row justify-content-center">
 
-    <button routerLink="/car/add" type="button" class="btn btn-primary">Agregar</button>
+    <button  routerLink="/car/add" type="button" class="btn btn-primary">Agregar</button>
 
-    <div class="card" style="width: 18rem;" *ngFor="let v of vehiculos">
-        <img [src]="v.foto" class="card-img-top">
-        <div class="card-body">
-            <h5 class="card-title">{{v.marca}} {{v.modelo}}</h5>
-            <p class="card-text">Vehiculo de color {{v.color}} del año {{v.anio}}.</p>
-        </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">Placa: {{v.placa}}</li>
-            <li class="list-group-item">Precio: {{v.precio}}</li>
-            <li class="list-group-item">Descuento: {{v.descuento}}%</li>
-        </ul>
-        <div class="card-body">
-            <a href="#" class="btn btn-primary">Comprar</a>
-        </div>
-    </div>
-</div> -->
-<div class="row">
-
-    <button *ngIf="rol == 'admin'" routerLink="/car/add" type="button" class="btn btn-primary">Agregar</button>
-
-    <div class="col-8">
+    <div class="col-6">
         <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel"
             (slid.bs.carousel)="changeSlide($event)">
             <div class="carousel-inner">
@@ -31,20 +11,19 @@
                     <img [src]="vehiculo.foto" class="d-block w-100">
                 </div>
             </div>
-            <button class="carousel-control-prev verde" type="button" data-bs-target="#carouselExampleAutoplaying"
+            <button class="carousel-control-prev change" type="button" data-bs-target="#carouselExampleAutoplaying"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next verde" type="button" data-bs-target="#carouselExampleAutoplaying"
+            <button class="carousel-control-next change" type="button" data-bs-target="#carouselExampleAutoplaying"
                 data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
     </div>
-
-    <div class="col-4">
+    <div class="col-6">
         <mat-card>
             <mat-card-header>
                 <mat-card-title>{{car.modelo}} {{car.marca}}</mat-card-title>
@@ -60,10 +39,10 @@
                 </ul>
             </mat-card-content>
             <mat-card-actions class="justify-content-center">
-                <button *ngIf="rol == 'admin'" mat-fab class="espacio azul"routerLink="/car/edit/{{car.id}}">
+                <button  mat-fab class="espacio azul"routerLink="/car/edit/{{car.id}}">
                     <mat-icon>edit</mat-icon>
                 </button>
-                <button *ngIf="rol == 'admin'" mat-fab class="espacio" (click)="deleteVehiculo()">
+                <button mat-fab class="espacio" (click)="deleteVehiculo()">
                     <mat-icon>delete</mat-icon>
                 </button>
                 <button mat-fab class="verde espacio" color="warn" routerLink="/run/car/{{car.id}}">

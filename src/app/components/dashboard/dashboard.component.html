@@ -7,31 +7,31 @@
       <img class="logo" src="../../../assets/img/logo1.png" alt="" routerLink="/home">
     </mat-toolbar>
     <mat-nav-list>
-      <button mat-button routerLink="/home">
+      <button mat-button routerLink="/home" [class.active]="activeButton === 1" (click)="setActiveButton(1)">
         <mat-icon>home</mat-icon>
         Home
       </button>
-      <button mat-button routerLink="/run">
+      <button mat-button routerLink="/run" [class.active]="activeButton === 2" (click)="setActiveButton(2)">
         <mat-icon> trending_up</mat-icon>
         Realizar simulación
       </button>
-      <button mat-button routerLink="/history">
+      <button mat-button routerLink="/history" [class.active]="activeButton === 3" (click)="setActiveButton(3)">
         <mat-icon>history</mat-icon>
         Simulaciones
       </button>
-      <button *ngIf="rol == 'admin'" mat-button routerLink="/bank">
+      <button mat-button routerLink="/bank" [class.active]="activeButton === 4" (click)="setActiveButton(4)">
         <mat-icon>savings</mat-icon>
         Financieras
       </button>
-      <button mat-button routerLink="/bank/compare">
+      <button mat-button routerLink="/bank/compare" [class.active]="activeButton === 5" (click)="setActiveButton(5)">
         <mat-icon> difference </mat-icon>
         Comparar Financieras
       </button>
-      <button mat-button routerLink="/cars">
+      <button mat-button routerLink="/cars" [class.active]="activeButton === 6" (click)="setActiveButton(6)">
         <mat-icon>directions_car</mat-icon>
         Carros
       </button>
-      <button mat-button (click)="openDialog()">
+      <button mat-button (click)="openDialog()" [class.active]="activeButton === 7" >
         <mat-icon>logout</mat-icon>
         Cerrar sesión
       </button>

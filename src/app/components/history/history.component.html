@@ -41,10 +41,10 @@
                     <td mat-cell *matCellDef="let row"> {{row.COK}}% </td>
                 </ng-container>
                 <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Acciones </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Estado </th>
                     <td mat-cell *matCellDef="let row">
                         <div>
-                            <button mat-mini-fab class="actions" routerLink="/show-run/{{row.id}}">
+                            <button mat-mini-fab class="actions" [ngClass]="getRowClass(row.status)" routerLink="/show-run/{{row.id}}">
                                 <mat-icon>visibility</mat-icon>
                             </button>
                         </div>
@@ -52,7 +52,7 @@
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="getRowClass(row.status)"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" ></tr>
 
                 <!-- Row shown when there is no matching data. -->
                 <tr class="mat-row" *matNoDataRow>
@@ -64,10 +64,10 @@
         </div>
     </div>
     <div class="col-10 space text-center ">
-        <span class="badge cliente-row text-dark">Cliente</span>
-        <span class="badge renovar-row text-dark">Renovado</span>
-        <span class="badge cancelar-row text-dark">Cancelado</span>
+        <span class="badge cancelar-row text-white">Cancelado</span>
+        <span class="badge renovar-row text-white">Renovado</span>
         <span class="badge normal-row text-dark">Simulación</span>
-        <span class="badge comprar-row text-dark">Comprado </span>       
+        <span class="badge comprar-row text-white">Comprado </span>       
+        <span class="badge cliente-row text-white">Cliente</span>
     </div>
 </div>

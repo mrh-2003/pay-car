@@ -53,10 +53,10 @@ import { CompareBanksComponent } from './components/compare-banks/compare-banks.
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    AngularFireModule.initializeApp(environment.firebase),
     BrowserAnimationsModule,
     SharedModule,
     LayoutModule,
-    AngularFireModule.initializeApp(environment.firebase)
   ],
   providers: [],
   bootstrap: [AppComponent]

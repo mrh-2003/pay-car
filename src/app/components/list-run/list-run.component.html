@@ -138,7 +138,7 @@
         <button
         [ngClass]="{ 'disabled-button': !cambio, 'enabled-button': cambio }"
         mat-raised-button *ngIf="corrida.status == 'normal' || corrida.status == 'cliente'" (click)="updateData()" [disabled]="!cambio">Actualizar datos</button>
-        <button mat-raised-button *ngIf="corrida.status == 'normal' && !corrida.idReference" color="accent" (click)="deleteData()">Eliminar simulación</button>
+        <button mat-raised-button *ngIf="corrida.status == 'normal' && !corrida.idReference" color="warn" (click)="deleteData()">Eliminar simulación</button>
     </div>
 
 </div>
