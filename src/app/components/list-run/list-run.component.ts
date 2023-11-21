@@ -8,6 +8,7 @@ import { DeleteDialogComponent } from '../delete-dialog/delete-dialog.component'
 import { OptionsDialogComponent } from '../options-dialog/options-dialog.component';
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { PriceDialogComponent } from '../price-dialog/price-dialog.component';
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-list-run',
@@ -23,6 +24,7 @@ export class ListRunComponent {
   constructor(private corridaService: CorridaService,
     private route: ActivatedRoute,
     private router: Router,
+    private excelService: ExcelService,
     public dialog: MatDialog) { }
   ngOnInit() {
     this.id = this.route.snapshot.params["id"]
@@ -111,6 +113,29 @@ export class ListRunComponent {
   }
   getSegDesg() {
     return this.corrida.banco.segDesgravamen / 100
+  }
+  export(){
+    let data = []
+    let i = 0;
+    for (const p of this.periodos) {
+      const fila = {
+        Periodo: i,
+        PG:  i == 0 || i == this.corrida.gracia.length + 1 ?  "-" : this.corrida.gracia[i - 1],
+        Saldo: i == this.corrida.gracia.length + 1 ? 0 :  p.saldo,
+        Amortizacion: -p.amort > 0 ? 0: -p.amort,
+        Interes: -p.interes,
+        Seg_Degravamen: -p.segDes,
+        Cuota: -p.cuota,
+        Seg_Riesgo: i!=0 ? -this.getSeguroRiesgo() : 0,
+        Comision: i!=0? -this.corrida.banco.comPeriodica : 0,
+        Portes: i!=0? -this.corrida.banco.portes : 0,
+        Gast_Administrativos: i!=0? -this.corrida.banco.gastosAdmin : 0,
+        Flujo: i == 0? p.flujo : -p.flujo,
+      }
+      i ++;
+      data.push(fila)
+    }
+    this.excelService.exportToExcel(data);
   }
 
   abs(numero: number) {
