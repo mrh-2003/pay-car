@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,ElementRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Corrida } from 'src/app/models/corrida';
@@ -9,7 +9,8 @@ import { OptionsDialogComponent } from '../options-dialog/options-dialog.compone
 import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 import { PriceDialogComponent } from '../price-dialog/price-dialog.component';
 import { ExcelService } from 'src/app/services/excel.service';
-
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-list-run',
   templateUrl: './list-run.component.html',
@@ -242,5 +243,41 @@ export class ListRunComponent {
         this.corridaService.deleteCorrida(this.id).then(() => this.router.navigate(["history"]));
       }
     })
+  }
+  @ViewChild('tabla', { static: false }) tablaRef!: ElementRef;
+  @ViewChild('card', { static: false }) cardRef!: ElementRef;
+
+  exportarAPDF(): void {
+    const pdf = new jspdf.jsPDF();
+
+    const options = {
+      scale: 2,
+      useCORS: true,
+      scrollY: 0,
+      scrollX: 0,
+      logging: true
+    };
+
+    const cardElement = this.cardRef.nativeElement;
+    const tablaElement = this.tablaRef.nativeElement;
+
+    html2canvas(cardElement, options).then((cardCanvas) => {
+      html2canvas(tablaElement, options).then((tablaCanvas) => {
+        const cardImg = cardCanvas.toDataURL('image/png');
+        const tablaImg = tablaCanvas.toDataURL('image/png');
+
+        const imgWidth = pdf.internal.pageSize.getWidth();
+        const imgHeight = pdf.internal.pageSize.getHeight();
+
+        // Agregar el título en la primera página
+        pdf.text('Plan de pagos PayCar', imgWidth / 2, 10, { align: 'center' });
+
+        pdf.addImage(cardImg, 'PNG', 0, 15, imgWidth, imgHeight / 2 - 15); // Agrega la imagen de #card
+        pdf.addPage();
+        pdf.addImage(tablaImg, 'PNG', 10, 10, imgWidth - 20, imgHeight / 2); // Agrega la imagen de #tabla
+
+        pdf.save('Plan de pagos ' + new Date().toLocaleString() + '.pdf');
+      });
+    });
   }
 }
