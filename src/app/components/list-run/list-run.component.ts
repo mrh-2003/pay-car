@@ -135,7 +135,7 @@ export class ListRunComponent {
       i ++;
       data.push(fila)
     }
-    this.excelService.exportToExcel(data);
+    this.excelService.exportToExcel(data, this.getVan(), this.getTIR(), this.corrida);
   }
 
   abs(numero: number) {

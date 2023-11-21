@@ -19,7 +19,7 @@
         <mat-icon>history</mat-icon>
         Simulaciones
       </button>
-      <button mat-button routerLink="/bank" [class.active]="activeButton === 4" (click)="setActiveButton(4)">
+      <button *ngIf="rol != 'client'" mat-button routerLink="/bank" [class.active]="activeButton === 4" (click)="setActiveButton(4)">
         <mat-icon>savings</mat-icon>
         Financieras
       </button>

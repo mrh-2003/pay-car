@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-6">
+    <div class="col-xl-6 col-xs-12">
         <div class="card paycar" style="width: 18rem;">
             <div class="card-body">
                 <h2 class="card-title">{{paycar.nombre}}</h2>
@@ -20,7 +20,7 @@
               </ul>
         </div>
     </div>
-    <div class="col-6">
+    <div class="col-xl-6 col-xs-12">
         <cdk-accordion class="example-accordion">
             <cdk-accordion-item *ngFor="let bank of bancos; let index = index;" #accordionItem="cdkAccordionItem"
                 class="example-accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"

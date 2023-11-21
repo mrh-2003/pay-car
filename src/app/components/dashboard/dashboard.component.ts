@@ -11,9 +11,10 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  activeButton: number = 1; // Inicializas la variable para el botón activo
-
+  activeButton: number = parseInt(localStorage.getItem('index') as string); // Inicializas la variable para el botón activo
+  rol = localStorage.getItem('rol');
   setActiveButton(index: number) {
+    localStorage.setItem('index', index.toString());
     this.activeButton = index;
   }
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)

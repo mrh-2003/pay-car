@@ -13,6 +13,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 export class ListCarComponent {
   vehiculos : Vehiculo[] = [];
   car: Vehiculo = new Vehiculo()
+  rol = localStorage.getItem('rol');
   constructor(
     private vehiculoService: VehiculoService,
     public dialog: MatDialog
