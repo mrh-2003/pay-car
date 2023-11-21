@@ -143,7 +143,7 @@ export class ListRunComponent {
     return Math.abs(numero)
   }
   getSeguroRiesgo() {
-    return this.corrida.precio * (this.corrida.banco.segRiesgo / 100)
+    return this.corrida.precio * (this.corrida.banco.segRiesgo / 100) / (360 / this.getDias(this.corrida.frecPago))
   }
 
   getVan() {
