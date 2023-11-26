@@ -85,18 +85,21 @@ export class ListRunComponent {
     })
     for (let i = 0; i <= this.corrida.gracia.length; i++) {
       const periodo: Periodo = new Periodo();
+      periodo.flujo = 0;
       periodo.interes = this.periodos[i].saldo * (this.corrida.tasa / 100);
       periodo.segDes = this.getSegDesg() * this.periodos[i].saldo;
       periodo.cuota = this.calcularCuota(this.periodos[i], i);
       if (this.corrida.gracia[i] == "Total") {
         periodo.cuota = 0;
+        periodo.flujo = periodo.segDes
       }
       periodo.amort = periodo.cuota - periodo.interes - periodo.segDes;
       if (this.corrida.gracia[i] == "Parcial") {
+        periodo.cuota -= periodo.amort
         periodo.amort = 0;
       }
       periodo.saldo = this.periodos[i].saldo - periodo.amort;
-      periodo.flujo = periodo.cuota + this.getSeguroRiesgo() + this.corrida.banco.portes + this.corrida.banco.gastosAdmin + this.corrida.banco.comPeriodica
+      periodo.flujo += periodo.cuota + this.getSeguroRiesgo() + this.corrida.banco.portes + this.corrida.banco.gastosAdmin + this.corrida.banco.comPeriodica
       this.periodos.push(periodo);
     }
     const periodo: Periodo = this.periodos[this.corrida.gracia.length + 1];
